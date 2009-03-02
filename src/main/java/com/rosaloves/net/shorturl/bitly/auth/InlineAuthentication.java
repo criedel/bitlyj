@@ -4,7 +4,8 @@ import com.rosaloves.net.shorturl.bitly.Request;
 
 /**
  * An implementation of Authentication that authenticates requests "inline"
- * via request parameters in the URL.
+ * via request parameters in the URL. Instances are immutable, so a single
+ * instance may be safely used across client instances, threads, etc.
  *
  * $Id$
  *

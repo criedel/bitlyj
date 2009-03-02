@@ -30,7 +30,7 @@ public class RESTTransport {
 		
 		Request request = auth.decorateRequest(new Request());
 		
-		request.addParameters("version", IBitly.API_VERSION);
+		request.addParameters("version", Bitly.API_VERSION);
 		request.addParameters(args);
 		
 		URL url = new URL(assembleRequestUrl(method, request));
@@ -57,7 +57,7 @@ public class RESTTransport {
 	
 	String assembleRequestUrl(String method, Request request) {
 		
-		StringBuilder sb = new StringBuilder(IBitly.API_URL + "/" + method + "?");
+		StringBuilder sb = new StringBuilder(Bitly.API_URL + "/" + method + "?");
 		Iterator<String> keyIterator = request.getParameters().keySet().iterator();
 		
 		while(keyIterator.hasNext()) {

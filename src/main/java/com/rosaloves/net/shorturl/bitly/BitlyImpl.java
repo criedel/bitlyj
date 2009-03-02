@@ -20,7 +20,7 @@ import com.rosaloves.net.shorturl.bitly.url.BitlyUrlStatsImpl;
  *
  * @author Chris Lewis (Feb 24, 2009)
  */
-public class BitlyImpl implements IBitly {
+public class BitlyImpl implements Bitly {
 	
 	private RESTTransport transport;
 	
@@ -38,7 +38,7 @@ public class BitlyImpl implements IBitly {
 
 	public BitlyUrlInfo info(String hash) throws IOException {
 		
-		Response resp = transport.call(IBitly.METHOD_INFO, "hash", hash);
+		Response resp = transport.call(Bitly.METHOD_INFO, "hash", hash);
 		
 		JSONObject json = resp.getJSONResult(hash);
 		
@@ -58,7 +58,7 @@ public class BitlyImpl implements IBitly {
 
 	public BitlyUrlStats stats(String hash) throws IOException {
 		
-		Response resp = transport.call(IBitly.METHOD_STATS, "hash", hash);
+		Response resp = transport.call(Bitly.METHOD_STATS, "hash", hash);
 		JSONObject results = resp.getJSONResults();
 		
 		BitlyUrlStats stats = new BitlyUrlStatsImpl(results.getInt("clicks"));

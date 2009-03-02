@@ -26,7 +26,7 @@ public class BitlyImplTest {
 	
 	public static final String HT_HASH = "fB05";
 	
-	private IBitly bitly;
+	private Bitly bitly;
 	
 	@BeforeSuite
 	public void setUp() {

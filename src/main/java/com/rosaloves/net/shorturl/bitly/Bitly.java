@@ -8,20 +8,23 @@ import com.rosaloves.net.shorturl.bitly.url.BitlyUrlInfo;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlStats;
 
 /**
- * IBitly
+ * The client interface to the bit.ly API. The URL methods provided by bit.ly
+ * are defined here; client code need only access an implementation. 
  *
  * $Id$
  *
  * @author Chris Lewis (Feb 24, 2009)
  */
-public interface IBitly { //TODO rename
+public interface Bitly {
 	
 	public static final String API_URL = "http://api.bit.ly";
 	
 	public static final String API_VERSION = "2.0.1";
 	
 	public static final String METHOD_EXPAND = "expand";
+	
 	public static final String METHOD_INFO = "info";
+	
 	public static final String METHOD_STATS = "stats";
 	
 	/**
@@ -58,8 +61,10 @@ public interface IBitly { //TODO rename
 	 */
 	public BitlyUrlInfo info(String hash) throws IOException;
 	
-	//public BitlyUrlInfo info(String ... hashes) throws IOException;
+	//public Collection<BitlyUrlInfo> info(String ... hashes) throws IOException;
 	
 	public BitlyUrlStats stats(String hash) throws IOException;
+	
+	//errors
 	
 }

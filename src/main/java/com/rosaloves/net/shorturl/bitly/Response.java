@@ -19,6 +19,10 @@ public interface Response {
 	
 	public boolean hasErrors();
 	
+	/*
+	 * 
+	 */
+	
 	public JSONObject getJSON();
 	
 	public JSONObject getJSONResults();
