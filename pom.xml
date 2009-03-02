@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.rosaloves</groupId>
 	<artifactId>bitlyj</artifactId>
 	<name>bitlyj</name>
 	<version>1.0-SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
+
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>http://bitlyj.googlecode.com/svn/trunk/
+		</url>
+		<connection>scm:svn:http://bitlyj.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/trunk/</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<system>Google-Code</system>
+		<url>http://code.google.com/p/bitlyj/issues/list</url>
+	</issueManagement>
+
+	<developers>
+		<developer>
+			<id>chris</id>
+			<name>Chris Lewis</name>
+			<email>chris@rosaloves.com</email>
+			<roles>
+				<role>committer</role>
+			</roles>
+			<timezone>-5</timezone>
+		</developer>
+
+	</developers>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -23,7 +58,7 @@
 	</dependencies>
 
 	<build>
-		<!-- <finalName>rosaloves-tweetr</finalName> -->
+		<finalName>bitlyj</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
