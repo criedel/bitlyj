@@ -37,7 +37,7 @@ public interface Bitly {
 	 * @param longUrl The URL to shorten
 	 * @return The shortened URL
 	 */
-	public BitlyUrl shorten(String longUrl) throws IOException;
+	public BitlyUrl shorten(String longUrl) throws IOException, BitlyException;
 	
 	/**
 	 * Shorten a URL using a predefined hash (keyword).
@@ -45,7 +45,7 @@ public interface Bitly {
 	 * @param longUrl The URL to shorten
 	 * @param keyword A specific hash/keyword to use
 	 */
-	public BitlyUrl shorten(String longUrl, String keyword) throws IOException;
+	public BitlyUrl shorten(String longUrl, String keyword) throws IOException, BitlyException;
 	
 	/**
 	 * Expand a hash into its original long URL.
@@ -54,16 +54,16 @@ public interface Bitly {
 	 * @return The original long URL
 	 * @throws IOException
 	 */
-	public URL expandHash(String hash) throws IOException;
+	public URL expandHash(String hash) throws IOException, BitlyException;
 	
 	/**
-	 * 
+	 * Retrieve the collected data on a bit.ly URL.
 	 * 
 	 * @param hash
-	 * @return
+	 * @return The info on the URL as collected by bit.ly
 	 * @throws IOException
 	 */
-	public BitlyUrlInfo info(String hash) throws IOException;
+	public BitlyUrlInfo info(String hash) throws IOException, BitlyException;
 	
 	//TODO public Collection<BitlyUrlInfo> info(String ... hashes) throws IOException;
 	

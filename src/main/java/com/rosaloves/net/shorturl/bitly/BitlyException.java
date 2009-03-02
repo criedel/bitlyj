@@ -10,7 +10,7 @@ package com.rosaloves.net.shorturl.bitly;
 public class BitlyException extends RuntimeException {
 
 	private int errorCode;
-	
+
 	public BitlyException() {
 		super();
 	}
@@ -20,8 +20,12 @@ public class BitlyException extends RuntimeException {
 	}
 	
 	public BitlyException(int errorCode, Object errorMessage) {
-		super(String.format("%s (%d)", errorMessage.toString(), errorCode));
+		super(String.format("%s (%d)", errorMessage, errorCode));
 		this.errorCode = errorCode;
+	}
+	
+	public int getErrorCode() {
+		return errorCode;
 	}
 	
 }

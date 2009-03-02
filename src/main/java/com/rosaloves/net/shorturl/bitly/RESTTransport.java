@@ -3,6 +3,7 @@ package com.rosaloves.net.shorturl.bitly;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Iterator;
@@ -33,9 +34,8 @@ public class RESTTransport {
 		request.addParameters("version", Bitly.API_VERSION);
 		request.addParameters(args);
 		
-		URL url = new URL(assembleRequestUrl(method, request));
-		
-		URLConnection urlCon = url.openConnection();
+		URLConnection urlCon = assembleRequestUrl(method, request)
+			.openConnection();
 		
 		for(String header : request.getHeaders().keySet())
 			urlCon.setRequestProperty(header, request.getHeader(header));
@@ -50,12 +50,12 @@ public class RESTTransport {
 		
 		reader.close();
 		
-		Response resp = new ResponseImpl(JSONObject.fromObject(sb.toString()));
+		Response resp = parseResponse(sb.toString());
 		
 		return resp;
 	}
 	
-	String assembleRequestUrl(String method, Request request) {
+	URL assembleRequestUrl(String method, Request request) throws MalformedURLException {
 		
 		StringBuilder sb = new StringBuilder(Bitly.API_URL + "/" + method + "?");
 		Iterator<String> keyIterator = request.getParameters().keySet().iterator();
@@ -66,7 +66,7 @@ public class RESTTransport {
 			if(keyIterator.hasNext()) sb.append('&');
 		}
 		
-		return sb.toString();
+		return new URL(sb.toString());
 	}
 	
 	Response parseResponse(String responseBody) {
