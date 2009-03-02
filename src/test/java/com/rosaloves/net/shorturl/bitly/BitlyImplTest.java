@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.rosaloves.net.shorturl.bitly.auth.UrlAuthentication;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrl;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlInfo;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlStats;
@@ -39,8 +38,8 @@ public class BitlyImplTest {
 	
 	@BeforeSuite
 	public void setUp() {
-		bitly  = new BitlyImpl(new UrlAuthentication(
-			"bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07"));
+		bitly = BitlyFactory.newInstance("bitlyapidemo",
+			"R_0da49e0a9118ff35f52f629d2d71bf07");
 	}
 	
 	@Test

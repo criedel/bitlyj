@@ -14,8 +14,18 @@ import java.net.URL;
  */
 public interface BitlyUrlInfo {
 	
+	/**
+	 * A convenience method to get the long URL of the bit.ly URL.
+	 * 
+	 * @return The long URL.
+	 */
 	public URL getUrl();
 	
+	/**
+	 * Get the bit.ly URL.
+	 * 
+	 * @return The bit.ly URL.
+	 */
 	public BitlyUrl getBitlyUrl();
 	
 }
