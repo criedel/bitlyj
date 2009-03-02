@@ -6,6 +6,7 @@ import java.net.URL;
  * BitlyUrlInfo
  *
  * TODO This interface is currently lacking useful members.
+ * TODO calais
  *
  * $Id$
  *
