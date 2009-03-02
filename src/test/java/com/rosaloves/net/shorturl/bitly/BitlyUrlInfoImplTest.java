@@ -18,7 +18,7 @@ public class BitlyUrlInfoImplTest {
 	
 	@Test
 	public void testBitlyUrl() {
-		BitlyUrl url = new BitlyUrlImpl("1234", "http://rosaloves.com/");
+		BitlyUrl url = new BitlyUrlImpl("1234", "4321", "http://rosaloves.com/");
 		BitlyUrlInfo info = new BitlyUrlInfoImpl(url);
 		
 		assert info.getBitlyUrl().getHash().equals("1234");

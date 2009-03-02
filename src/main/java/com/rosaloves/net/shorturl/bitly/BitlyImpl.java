@@ -42,18 +42,26 @@ public class BitlyImpl implements Bitly {
 		
 		JSONObject json = resp.getJSONResult(hash);
 		
-		return new BitlyUrlInfoImpl(new BitlyUrlImpl(json.getString("hash"), json.getString("longUrl")));
+		return new BitlyUrlInfoImpl(new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), json.getString("longUrl")));
 		
 	}
 
 	public BitlyUrl shorten(String longUrl, String keyword) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Response resp = transport.call(Bitly.METHOD_SHORTEN, "longUrl", longUrl, "keyword", keyword);
+		
+		JSONObject json = resp.getJSONResult(longUrl);
+		
+		return new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), longUrl);
 	}
 
 	public BitlyUrl shorten(String longUrl) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Response resp = transport.call(Bitly.METHOD_SHORTEN, "longUrl", longUrl);
+		
+		JSONObject json = resp.getJSONResult(longUrl);
+		
+		return new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), longUrl);
 	}
 
 	public BitlyUrlStats stats(String hash) throws IOException {

@@ -11,7 +11,7 @@ import com.rosaloves.net.shorturl.bitly.Request;
  *
  * @author Chris Lewis (Feb 25, 2009)
  */
-public class InlineAuthentication implements Authentication {
+public class UrlAuthentication implements Authentication {
 	
 	private String userName;
 
@@ -23,7 +23,7 @@ public class InlineAuthentication implements Authentication {
 	 * @param userName The bit.ly login name
 	 * @param apiKey The bit.ly API key
 	 */
-	public InlineAuthentication(String userName, String apiKey) {
+	public UrlAuthentication(String userName, String apiKey) {
 		this.userName = userName;
 		this.apiKey = apiKey;
 	}

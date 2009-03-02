@@ -1,7 +1,7 @@
 package com.rosaloves.net.shorturl.bitly;
 
 import com.rosaloves.net.shorturl.bitly.auth.Authentication;
-import com.rosaloves.net.shorturl.bitly.auth.InlineAuthentication;
+import com.rosaloves.net.shorturl.bitly.auth.UrlAuthentication;
 
 /**
  * BitlyFactory
@@ -19,7 +19,7 @@ public class BitlyFactory {
 	 * @return The Bitly implementation configured with an
 	 */
 	public static Bitly newInstance(String userName, String apiKey) {
-		Authentication auth = new InlineAuthentication(userName, apiKey);
+		Authentication auth = new UrlAuthentication(userName, apiKey);
 		return new BitlyImpl(auth);
 	}
 	

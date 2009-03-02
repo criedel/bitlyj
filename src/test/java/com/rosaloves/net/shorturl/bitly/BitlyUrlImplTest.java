@@ -16,9 +16,11 @@ public class BitlyUrlImplTest {
 	
 	@Test
 	public void testHash() {
-		BitlyUrl url = new BitlyUrlImpl("1234", "http://rosaloves.com/");
+		BitlyUrl url = new BitlyUrlImpl("1234", "4321", "http://rosaloves.com/");
 		
 		assert url.getHash().equals("1234");
+		assert url.getUserHash().equals("4321");
+		assert url.getShortUrl().toString().equals("http://bit.ly/4321");
 		assert url.getLongUrl().toString().equals("http://rosaloves.com/");
 	}
 	
