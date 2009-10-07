@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import net.sf.json.JSONObject;
 
+import com.rosaloves.net.shorturl.bitly.api.Api;
 import com.rosaloves.net.shorturl.bitly.auth.Authentication;
 
 /**
@@ -23,15 +24,18 @@ public class RESTTransport {
 	
 	private Authentication auth;
 	
-	RESTTransport(Authentication auth) {
+	private Api api;
+	
+	RESTTransport(Authentication auth, Api api) {
 		this.auth = auth;
+		this.api = api;
 	}
 	
 	public Response call(String method, Object ... args) throws IOException {
 		
 		Request request = auth.decorateRequest(new Request());
 		
-		request.addParameters("version", Bitly.API_VERSION);
+		request.addParameters("version", api.getVersion());
 		request.addParameters(args);
 		
 		URLConnection urlCon = assembleRequestUrl(method, request)
@@ -57,7 +61,7 @@ public class RESTTransport {
 	
 	URL assembleRequestUrl(String method, Request request) throws MalformedURLException {
 		
-		StringBuilder sb = new StringBuilder(Bitly.API_URL + "/" + method + "?");
+		StringBuilder sb = new StringBuilder(api.getEndPoint() + "/" + method + "?");
 		Iterator<String> keyIterator = request.getParameters().keySet().iterator();
 		
 		while(keyIterator.hasNext()) {

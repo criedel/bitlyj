@@ -5,6 +5,8 @@ import java.net.URL;
 
 import net.sf.json.JSONObject;
 
+import com.rosaloves.net.shorturl.bitly.api.Api;
+import com.rosaloves.net.shorturl.bitly.api.BitlyApi;
 import com.rosaloves.net.shorturl.bitly.auth.Authentication;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrl;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlImpl;
@@ -25,12 +27,16 @@ public class BitlyImpl implements Bitly {
 	private RESTTransport transport;
 	
 	BitlyImpl(Authentication auth) {
-		transport = new RESTTransport(auth);
+		transport = new RESTTransport(auth, new BitlyApi());
+	}
+	
+	BitlyImpl(Authentication auth, Api api) {
+		transport = new RESTTransport(auth, api);
 	}
 	
 	public URL expandHash(String hash) throws IOException {
 		
-		Response resp = transport.call(BitlyImpl.METHOD_EXPAND, "hash", hash);
+		Response resp = transport.call(Bitly.METHOD_EXPAND, "hash", hash);
 		
 		return new URL(resp.getJSONResult(hash).getString("longUrl"));
 		

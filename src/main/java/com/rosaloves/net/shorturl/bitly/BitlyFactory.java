@@ -1,5 +1,6 @@
 package com.rosaloves.net.shorturl.bitly;
 
+import com.rosaloves.net.shorturl.bitly.api.JmpApi;
 import com.rosaloves.net.shorturl.bitly.auth.Authentication;
 import com.rosaloves.net.shorturl.bitly.auth.UrlAuthentication;
 
@@ -25,6 +26,15 @@ public class BitlyFactory {
 	
 	public static Bitly newInstance(Authentication auth) {
 		return new BitlyImpl(auth);
+	}
+	
+	public static Bitly newJmpInstance(String userName, String apiKey) {
+		Authentication auth = new UrlAuthentication(userName, apiKey);
+		return new BitlyImpl(auth, new JmpApi());
+	}
+	
+	public static Bitly newJmpInstance(Authentication auth) {
+		return new BitlyImpl(auth, new JmpApi());
 	}
 	
 }
