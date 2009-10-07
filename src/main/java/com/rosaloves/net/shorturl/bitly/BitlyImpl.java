@@ -2,6 +2,7 @@ package com.rosaloves.net.shorturl.bitly;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import net.sf.json.JSONObject;
 
@@ -63,7 +64,8 @@ public class BitlyImpl implements Bitly {
 
 	public BitlyUrl shorten(String longUrl) throws IOException {
 		
-		Response resp = transport.call(Bitly.METHOD_SHORTEN, "longUrl", longUrl);
+		Response resp = transport.call(Bitly.METHOD_SHORTEN, "longUrl",
+				URLEncoder.encode(longUrl, "UTF-8"));
 		
 		JSONObject json = resp.getJSONResult(longUrl);
 		
