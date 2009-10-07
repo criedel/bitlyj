@@ -27,12 +27,15 @@ public class BitlyImpl implements Bitly {
 	
 	private RESTTransport transport;
 	
+	private Api api;
+	
 	BitlyImpl(Authentication auth) {
-		transport = new RESTTransport(auth, new BitlyApi());
+		this(auth, new BitlyApi());
 	}
 	
 	BitlyImpl(Authentication auth, Api api) {
 		transport = new RESTTransport(auth, api);
+		this.api = api;
 	}
 	
 	public URL expandHash(String hash) throws IOException {
@@ -49,7 +52,7 @@ public class BitlyImpl implements Bitly {
 		
 		JSONObject json = resp.getJSONResult(hash);
 		
-		return new BitlyUrlInfoImpl(new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), json.getString("longUrl")));
+		return new BitlyUrlInfoImpl(new BitlyUrlImpl(api.getUrl(), json.getString("hash"), json.getString("userHash"), json.getString("longUrl")));
 		
 	}
 
@@ -59,7 +62,7 @@ public class BitlyImpl implements Bitly {
 		
 		JSONObject json = resp.getJSONResult(longUrl);
 		
-		return new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), longUrl);
+		return new BitlyUrlImpl(api.getUrl(), json.getString("hash"), json.getString("userHash"), longUrl);
 	}
 
 	public BitlyUrl shorten(String longUrl) throws IOException {
@@ -69,7 +72,7 @@ public class BitlyImpl implements Bitly {
 		
 		JSONObject json = resp.getJSONResult(longUrl);
 		
-		return new BitlyUrlImpl(json.getString("hash"), json.getString("userHash"), longUrl);
+		return new BitlyUrlImpl(api.getUrl(), json.getString("hash"), json.getString("userHash"), longUrl);
 	}
 
 	public BitlyUrlStats stats(String hash) throws IOException {

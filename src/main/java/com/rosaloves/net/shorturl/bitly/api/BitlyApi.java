@@ -16,6 +16,10 @@ public class BitlyApi implements Api {
 	
 	public static final String API_VERSION = "2.0.1";
 	
+	public String getUrl() {
+		return URL;
+	}
+	
 	public String getEndPoint() {
 		return API_URL;
 	}

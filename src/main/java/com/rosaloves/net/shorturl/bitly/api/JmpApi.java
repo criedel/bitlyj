@@ -10,7 +10,14 @@ package com.rosaloves.net.shorturl.bitly.api;
  */
 public class JmpApi extends BitlyApi {
 	
+	public static final String URL = "http://j.mp";
+	
 	private static String API_URL = "http://api.j.mp";
+	
+	@Override
+	public String getUrl() {
+		return URL;
+	}
 	
 	@Override
 	public String getEndPoint() {

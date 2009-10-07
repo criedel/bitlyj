@@ -16,13 +16,7 @@ import com.rosaloves.net.shorturl.bitly.url.BitlyUrlStats;
  * @author Chris Lewis (Feb 24, 2009)
  */
 public interface Bitly {
-	
-	public static final String URL = "http://bit.ly";
-	
-	public static final String API_URL = "http://api.bit.ly";
-	
-	public static final String API_VERSION = "2.0.1";
-	
+		
 	public static final String METHOD_EXPAND = "expand";
 	
 	public static final String METHOD_INFO = "info";

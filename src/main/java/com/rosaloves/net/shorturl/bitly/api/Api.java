@@ -10,6 +10,8 @@ package com.rosaloves.net.shorturl.bitly.api;
  */
 public interface Api {
 
+	public String getUrl();
+	
 	public String getEndPoint();
 	
 	public String getVersion();

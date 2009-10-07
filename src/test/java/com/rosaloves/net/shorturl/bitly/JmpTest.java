@@ -7,6 +7,8 @@ import static org.testng.Assert.*;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import com.rosaloves.net.shorturl.bitly.api.JmpApi;
+import com.rosaloves.net.shorturl.bitly.url.BitlyUrl;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlInfo;
 import com.rosaloves.net.shorturl.bitly.url.BitlyUrlStats;
 
@@ -28,7 +30,7 @@ public class JmpTest {
 	
 	@BeforeSuite
 	public void setUp() {
-		jmp = BitlyFactory.newInstance("bitlyapidemo",
+		jmp = BitlyFactory.newJmpInstance("bitlyapidemo",
 			"R_0da49e0a9118ff35f52f629d2d71bf07");
 	}
 	
@@ -50,6 +52,12 @@ public class JmpTest {
 		BitlyUrlStats stats = jmp.stats(FFTP_HASH);
 		assertTrue(stats.getTotalClicks() > 0, String.format(
 			"Expected > 0 clicks for hash: %s!", FFTP_HASH));
+	}
+	
+	@Test
+	public void testShorten() throws IOException {
+		BitlyUrl url = jmp.shorten(FFTP_URL);
+		assertTrue(url.getShortUrl().toString().startsWith(JmpApi.URL), url.getShortUrl().toString());
 	}
 	
 }

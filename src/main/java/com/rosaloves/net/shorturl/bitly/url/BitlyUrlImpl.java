@@ -3,8 +3,6 @@ package com.rosaloves.net.shorturl.bitly.url;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.rosaloves.net.shorturl.bitly.Bitly;
-
 /**
  * BitlyUrlImpl
  *
@@ -22,15 +20,14 @@ public class BitlyUrlImpl implements BitlyUrl {
 	
 	private URL shortUrl;
 	
-	public BitlyUrlImpl(String hash, String userHash, String longUrl) {
+	public BitlyUrlImpl(String baseUrl, String hash, String userHash, String longUrl) {
 		
 		try {
 			this.longUrl = new URL(longUrl);
-			this.shortUrl = new URL(Bitly.URL + "/"
+			this.shortUrl = new URL(baseUrl + "/"
 				+ (userHash.length() == 0 ? hash : userHash));
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e); //FIXME!
+			throw new RuntimeException(e); // won't happen
 		}
 		
 		this.hash = hash;
