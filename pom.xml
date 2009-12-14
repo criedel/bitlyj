@@ -17,7 +17,7 @@
 	
 	<scm>
 		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
-		<connection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
+		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
 		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
 	</scm>
 	
