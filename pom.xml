@@ -16,9 +16,9 @@
 	</licenses>
 	
 	<scm>
-		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
-		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
-		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
+		<url>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
+		<connection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
+		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
 	</scm>
 	
 	<issueManagement>
@@ -71,7 +71,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.0-beta-7</version>
 				<configuration>
-					<tagBase>http://bitlyj.googlecode.com/svn/tags</tagBase>
+					<tagBase>https://bitlyj.googlecode.com/svn/tags</tagBase>
 				</configuration>
 			</plugin>
 			
