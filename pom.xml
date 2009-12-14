@@ -5,7 +5,7 @@
 	<artifactId>bitlyj</artifactId>
 	<name>bitlyj</name>
 	<version>1.0.0</version>
-	<url>http://maven.apache.org</url>
+	<url>http://code.google.com/p/bitlyj/</url>
 	
 	<licenses>
 		<license>
@@ -16,10 +16,9 @@
 	</licenses>
 	
 	<scm>
-		<url>http://bitlyj.googlecode.com/svn/trunk/
-		</url>
-		<connection>scm:svn:http://bitlyj.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/trunk/</developerConnection>
+		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0.0</url>
+		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0.0</connection>
+		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0.0</developerConnection>
 	</scm>
 	
 	<issueManagement>
@@ -67,7 +66,43 @@
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.0-beta-7</version>
+				<configuration>
+					<tagBase>http://bitlyj.googlecode.com/svn/tags</tagBase>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		
 		</plugins>
 	</build>
+	
+	<distributionManagement>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<name>Nexus Staging Repository</name>
+			<url>http://oss.sonatype.org/content/groups/staging/</url>
+		</repository>
+		<snapshotRepository>
+			<id>oss.sonatype.org</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
