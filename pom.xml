@@ -4,8 +4,12 @@
 	<groupId>com.rosaloves</groupId>
 	<artifactId>bitlyj</artifactId>
 	<name>bitlyj</name>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<url>http://code.google.com/p/bitlyj/</url>
+	<description>
+		A Java interface to the bit.ly and j.mp APIs, providing
+		URL-shortening services.
+	</description>
 	
 	<licenses>
 		<license>
@@ -16,9 +20,9 @@
 	</licenses>
 	
 	<scm>
-		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
-		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
-		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
+		<url>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
+		<connection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
+		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
 	</scm>
 	
 	<issueManagement>
