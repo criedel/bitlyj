@@ -4,7 +4,7 @@
 	<groupId>com.rosaloves</groupId>
 	<artifactId>bitlyj</artifactId>
 	<name>bitlyj</name>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<url>http://code.google.com/p/bitlyj/</url>
 	
 	<licenses>
@@ -16,9 +16,9 @@
 	</licenses>
 	
 	<scm>
-		<url>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
-		<connection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
-		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
+		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
+		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
+		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
 	</scm>
 	
 	<issueManagement>
