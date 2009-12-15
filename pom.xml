@@ -4,7 +4,7 @@
 	<groupId>com.rosaloves</groupId>
 	<artifactId>bitlyj</artifactId>
 	<name>bitlyj</name>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<url>http://code.google.com/p/bitlyj/</url>
 	
 	<licenses>
@@ -16,9 +16,9 @@
 	</licenses>
 	
 	<scm>
-		<url>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
-		<connection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
-		<developerConnection>scm:svn:http://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
+		<url>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</url>
+		<connection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</connection>
+		<developerConnection>scm:svn:https://bitlyj.googlecode.com/svn/tags/bitlyj-1.0</developerConnection>
 	</scm>
 	
 	<issueManagement>
@@ -108,12 +108,11 @@
 		</profile>
 	</profiles>
 	
-	
 	<distributionManagement>
 		<repository>
 			<id>oss.sonatype.org</id>
 			<name>Nexus Staging Repository</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<url>http://oss.sonatype.org/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>oss.sonatype.org</id>
