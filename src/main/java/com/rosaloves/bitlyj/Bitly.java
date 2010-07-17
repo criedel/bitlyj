@@ -98,7 +98,7 @@ public class Bitly {
 			} else if("long_url".equals(name)) {
 				url.setLongUrl(value);
 			} else if("url".equals(name)) {
-				url.setLongUrl(value);
+				url.setShortUrl(value);
 			} else if("global_hash".equals(name)) {
 				url.setGlobalHash(value);
 			} else if("hash".equals(name)) {
