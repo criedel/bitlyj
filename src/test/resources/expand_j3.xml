@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+    <status_code>200</status_code>
+    <status_txt>OK</status_txt>
+    <data>
+        <entry>
+            <hash>j3</hash>
+            <long_url>http://www.scotster.com/qf/?1152</long_url>
+            <user_hash>j3</user_hash>
+            <global_hash>lLWr</global_hash>
+        </entry>
+    </data>
+</response>

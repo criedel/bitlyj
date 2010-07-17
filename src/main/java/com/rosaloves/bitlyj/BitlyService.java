@@ -53,14 +53,12 @@ public class BitlyService {
 				throw new RuntimeException(e);
 			}
 		}
-		System.out.println("BitlyService.getUrlForCall() " + sb);
 		return sb.toString();
 	}
 	
 	private Document fetchUrl(String url) {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
-			System.out.println("BitlyService.fetchUrl() " + openConnection.getResponseCode());
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(openConnection.getInputStream());
 		} catch(Exception e) {
 			throw new RuntimeException(e);

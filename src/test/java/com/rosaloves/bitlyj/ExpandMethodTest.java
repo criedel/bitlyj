@@ -18,12 +18,12 @@ import org.w3c.dom.Document;
  * @author clewis Jul 17, 2010
  *
  */
-public class ExpandMethod {
+public class ExpandMethodTest {
 	Document doc;
 	
 	@Before
 	public void before() {
-		doc = TestUtils.classpathXmlIS("expand_j3.xml");
+		doc = Utils.classpathXmlIS("expand_j3.xml");
 	}
 	
 	@Test

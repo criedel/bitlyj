@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.rosaloves.bitlyj.Bitly;
 import com.rosaloves.bitlyj.BitlyService;
 import com.rosaloves.bitlyj.Info;
 import com.rosaloves.bitlyj.Url;
@@ -24,7 +23,7 @@ import com.rosaloves.bitlyj.Url;
  * @author clewis Jul 17, 2010
  *
  */
-public class Factory {
+public class FactoryTest {
 	
 	BitlyService bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	

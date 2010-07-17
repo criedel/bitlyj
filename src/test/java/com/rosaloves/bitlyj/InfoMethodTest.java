@@ -19,13 +19,13 @@ import org.w3c.dom.Document;
  * @author clewis Jul 17, 2010
  *
  */
-public class InfoMethod {
+public class InfoMethodTest {
 	
 	Document doc;
 	
 	@Before
 	public void before() {
-		doc = TestUtils.classpathXmlIS("info.xml");
+		doc = Utils.classpathXmlIS("info_http_tcrn.xml");
 	}
 	
 	@Test

@@ -17,12 +17,12 @@ import org.w3c.dom.Document;
  * @author clewis Jul 17, 2010
  *
  */
-public class ShortenMethod {
+public class ShortenMethodTest {
 	Document doc;
 	
 	@Before
 	public void before() {
-		doc = TestUtils.classpathXmlIS("shorten_http_betaworks.xml");
+		doc = Utils.classpathXmlIS("shorten_http_betaworks.xml");
 	}
 	
 	@Test
