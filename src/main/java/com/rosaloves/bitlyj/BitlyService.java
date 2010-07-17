@@ -24,12 +24,13 @@ public class BitlyService {
 	
 	private final String apiKey;
 	
-	private static final String endPoint = "http://api.bit.ly/v3/";
+	private final String endPoint;
 
-	public BitlyService(String user, String apiKey) {
+	BitlyService(String user, String apiKey, String endPoint) {
 		super();
 		this.user = user;
 		this.apiKey = apiKey;
+		this.endPoint = endPoint;
 	}
 	
 	public <A> A call(BitlyMethod<A> m) {
