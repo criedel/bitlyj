@@ -32,13 +32,10 @@ public class BitlyService {
 		this.apiKey = apiKey;
 	}
 	
-
-	/**
-	 * @param m
-	 */
 	public <A> A call(BitlyMethod<A> m) {
 		String endPoint = getUrlForCall(m);
-		return m.apply(fetchUrl(endPoint));
+		Document response = filterErrorResponse(fetchUrl(endPoint));
+		return m.apply(response);
 	}
 	
 	protected String getUrlForCall(BitlyMethod<?> m) {
@@ -56,10 +53,22 @@ public class BitlyService {
 		return sb.toString();
 	}
 	
+	private Document filterErrorResponse(Document doc) {
+		int code = Integer.parseInt(doc.getElementsByTagName("status_code").item(0).getTextContent());
+		if(code == 200)
+			return doc;
+		else {
+			throw new BitlyException(doc.getElementsByTagName("status_txt").item(0).getTextContent());
+		}
+	}
+	
 	private Document fetchUrl(String url) {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
-			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(openConnection.getInputStream());
+			if(openConnection.getResponseCode() == 200)
+				return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(openConnection.getInputStream());
+			else
+				throw new BitlyException("Transport error! " + openConnection.getResponseCode() + " " + openConnection.getResponseMessage());
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
