@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -85,5 +86,21 @@ public class ClicksTest {
 		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
 		assertEquals("bWw49z", url.getGlobalHash());
 		assertEquals("a4MSUH", url.getUserHash());
+	}
+	
+	@Test
+	public void multipleUrlResultParsing() {
+		doc = Utils.classpathXmlIS("clicks_2_urls.xml");
+		Set<UrlClicks> clicks = clicks("http://tcrn.ch/a4MSUH", "http://bit.ly/1YKMfY").apply(doc);
+		
+		assertEquals(2, clicks.size());
+	}
+	
+	@Test
+	public void multipleHashResultParsing() {
+		doc = Utils.classpathXmlIS("clicks_2_urls.xml");
+		Set<UrlClicks> clicks = clicks("bWw49z", "1YKMfY").apply(doc);
+		
+		assertEquals(2, clicks.size());
 	}
 }
