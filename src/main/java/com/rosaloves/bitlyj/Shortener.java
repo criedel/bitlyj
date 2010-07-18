@@ -70,11 +70,11 @@ public class Shortener {
 			throw new BitlyException("Unexpected response (no status and/or message)!");
 		}
 		
-		int code = Integer.parseInt(statusCode.getTextContent());
+		int code = Integer.parseInt(Methods.getTextContent(statusCode));
 		if(code == 200)
 			return doc;
 		else {
-			throw new BitlyException(statusText.getTextContent());
+			throw new BitlyException(Methods.getTextContent(statusText));
 		}
 	}
 	

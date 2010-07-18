@@ -99,12 +99,23 @@ public final class Methods {
 		
 	}
 	
+	static String getTextContent(Node n) {
+		StringBuffer sb = new StringBuffer(); 
+		NodeList nl = n.getChildNodes(); 
+		for (int i = 0; i < nl.getLength(); i++) { 
+		    Node child = nl.item(i); 
+		    if (child.getNodeType() == Node.TEXT_NODE) 
+		    	sb.append(child.getNodeValue()); 
+		}
+		return sb.toString();
+	}
+	
 	static UrlClicks parseClicks(Node item) {
 		NodeList nl = item.getChildNodes();
 		long user = 0, global = 0;
 		for(int i = 0; i < nl.getLength(); i++) {
 			String name = nl.item(i).getNodeName();
-			String value = nl.item(i).getTextContent();
+			String value = getTextContent(nl.item(i));
 			if("user_clicks".equals(name)) {
 				user = Long.parseLong(value);
 			} else if("global_clicks".equals(name)) {
@@ -130,7 +141,7 @@ public final class Methods {
 			
 			Node n = il.item(i);
 			String name = n.getNodeName();
-			String value = n.getTextContent();
+			String value = getTextContent(n);
 			
 			if("short_url".equals(name)) {
 				url.setShortUrl(value);
@@ -162,7 +173,7 @@ public final class Methods {
 			Node n = il.item(i);
 			
 			String name = n.getNodeName();
-			String value = n.getTextContent();
+			String value = getTextContent(n);
 			
 			if("created_by".equals(name)) {
 				createdBy = value;
