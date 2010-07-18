@@ -15,7 +15,8 @@ import org.w3c.dom.Document;
 public class Utils {
 	public static Document classpathXmlIS(String path) {
 		try {
-			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(ClassLoader.getSystemResourceAsStream(path));
+			return DocumentBuilderFactory.newInstance().newDocumentBuilder()
+				.parse(ClassLoader.getSystemResourceAsStream(path));
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}

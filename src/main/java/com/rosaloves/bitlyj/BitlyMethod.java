@@ -28,6 +28,7 @@ public abstract class BitlyMethod<A> {
 		return name;
 	}
 
+	/* Subject to change - maps dont support duplicate keys */
 	Map<String, String> getParameters() {
 		return parameters;
 	}
