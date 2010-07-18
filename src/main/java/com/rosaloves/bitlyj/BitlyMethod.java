@@ -1,6 +1,7 @@
 package com.rosaloves.bitlyj;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -22,6 +23,18 @@ public abstract class BitlyMethod<A> {
 	public BitlyMethod(String name, Map<String, String> parameters) {
 		this.name = name;
 		this.parameters = Collections.unmodifiableMap(parameters);
+	}
+	
+	protected BitlyMethod(String name, String ... parameters) {
+		this.name = name;
+		
+		//if(parameters.length % 2 != 0)
+		
+		Map<String, String> p = new HashMap<String, String>();
+		for(int i = 0; i < parameters.length; i += 2)
+			p.put(parameters[i], parameters[i + 1]);
+		
+		this.parameters = p;
 	}
 	
 	public String getName() {
