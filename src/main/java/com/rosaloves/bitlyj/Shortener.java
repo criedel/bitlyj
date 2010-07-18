@@ -11,14 +11,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 
 /**
- * BitlyShortener
+ * Shortener
  * 
  * $Id$
  * 
  * @author clewis Jul 17, 2010
  *
  */
-public class BitlyShortener {
+public class Shortener {
 	
 	private final String user;
 	
@@ -26,7 +26,7 @@ public class BitlyShortener {
 	
 	private final String endPoint;
 
-	BitlyShortener(String user, String apiKey, String endPoint) {
+	Shortener(String user, String apiKey, String endPoint) {
 		super();
 		this.user = user;
 		this.apiKey = apiKey;
@@ -39,6 +39,11 @@ public class BitlyShortener {
 		return m.apply(response);
 	}
 	
+	@Override
+	public String toString() {
+		return "Shortener [endPoint=" + endPoint + "]";
+	}
+
 	protected String getUrlForCall(BitlyMethod<?> m) {
 		StringBuilder sb = new StringBuilder(endPoint)
 			.append(m.getName() + "?")

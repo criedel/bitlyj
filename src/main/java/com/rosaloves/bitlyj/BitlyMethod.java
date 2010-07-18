@@ -32,6 +32,11 @@ public abstract class BitlyMethod<A> {
 		return parameters;
 	}
 
+	@Override
+	public String toString() {
+		return "BitlyMethod [name=" + name + ", parameters=" + parameters + "]";
+	}
+
 	public abstract A apply(Document document);
 	
 }

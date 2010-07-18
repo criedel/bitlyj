@@ -16,10 +16,10 @@ import org.w3c.dom.NodeList;
  * @author clewis Jul 17, 2010
  *
  */
-public class Bitly {
+public final class Bitly {
 	
-	public static BitlyShortener as(String user, String apiKey) {
-		return new BitlyShortener(user, apiKey, "http://api.bit.ly/v3/");
+	public static Shortener as(String user, String apiKey) {
+		return new Shortener(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
 	public static BitlyMethod<Set<Info>> info(String value) {
@@ -34,7 +34,7 @@ public class Bitly {
 		return Methods.shorten(longUrl);
 	}
 
-	public static class Methods {
+	public static final class Methods {
 		
 		public static BitlyMethod<Set<Info>> info(String value) {
 			HashMap<String, String> hashMap = getUrlMethodParams(value);
