@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.rosaloves.bitlyj.BitlyService;
+import com.rosaloves.bitlyj.BitlyShortener;
 import com.rosaloves.bitlyj.Url;
 
 /**
@@ -24,7 +24,7 @@ import com.rosaloves.bitlyj.Url;
  */
 public class FactoryTest {
 	
-	BitlyService bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
+	BitlyShortener bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	
 	@Test
 	public void testShorten() {

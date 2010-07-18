@@ -10,8 +10,8 @@ package com.rosaloves.bitlyj;
  */
 public class Jmp {
 	
-	public static BitlyService as(String user, String apiKey) {
-		return new BitlyService(user, apiKey, "http://api.j.mp/v3/");
+	public static BitlyShortener as(String user, String apiKey) {
+		return new BitlyShortener(user, apiKey, "http://api.j.mp/v3/");
 	}
 	
 }

@@ -11,14 +11,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 
 /**
- * BitlyService
+ * BitlyShortener
  * 
  * $Id$
  * 
  * @author clewis Jul 17, 2010
  *
  */
-public class BitlyService {
+public class BitlyShortener {
 	
 	private final String user;
 	
@@ -26,7 +26,7 @@ public class BitlyService {
 	
 	private final String endPoint;
 
-	BitlyService(String user, String apiKey, String endPoint) {
+	BitlyShortener(String user, String apiKey, String endPoint) {
 		super();
 		this.user = user;
 		this.apiKey = apiKey;

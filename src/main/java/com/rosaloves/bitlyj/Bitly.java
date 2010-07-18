@@ -18,8 +18,8 @@ import org.w3c.dom.NodeList;
  */
 public class Bitly {
 	
-	public static BitlyService as(String user, String apiKey) {
-		return new BitlyService(user, apiKey, "http://api.bit.ly/v3/");
+	public static BitlyShortener as(String user, String apiKey) {
+		return new BitlyShortener(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
 	public static BitlyMethod<Set<Info>> info(String value) {
