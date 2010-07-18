@@ -33,6 +33,10 @@ public final class Bitly {
 	public static BitlyMethod<Url> shorten(String longUrl) {
 		return Methods.shorten(longUrl);
 	}
+	
+	public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
+		return Methods.clicks(string);
+	}
 
 	public static final class Methods {
 		
@@ -46,7 +50,7 @@ public final class Bitly {
 					
 					NodeList infos = document.getElementsByTagName("info");
 					for(int i = 0; i < infos.getLength(); i ++) {
-						inf.add(new Info(parseInfo(infos.item(i))));
+						inf.add(parseInfo(infos.item(i)));
 					}
 					
 					return inf;
@@ -64,7 +68,7 @@ public final class Bitly {
 					
 					NodeList infos = document.getElementsByTagName("entry");
 					for(int i = 0; i < infos.getLength(); i ++) {
-						inf.add(parseInfo(infos.item(i)));
+						inf.add(parseUrl(infos.item(i)));
 					}
 					
 					return inf;
@@ -79,7 +83,7 @@ public final class Bitly {
 				@Override
 				public Url apply(Document document) {
 					NodeList infos = document.getElementsByTagName("data");
-					return parseInfo(infos.item(0));
+					return parseUrl(infos.item(0));
 				}
 			};
 		}
@@ -88,13 +92,12 @@ public final class Bitly {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			
 			for(String p : value) {
-				String name = p.startsWith("http://") ? "shortUrl" : "hash";
-				hashMap.put(name, p);			
+				hashMap.put(hashOrUrl(p), p);			
 			}
 			return hashMap;
 		}
-		
-		private static Url parseInfo(Node nl) {
+
+		static Url parseUrl(Node nl) {
 			Url url = new Url();
 			NodeList il = nl.getChildNodes();
 			for(int i = 0; i < il.getLength(); i ++) {
@@ -111,11 +114,49 @@ public final class Bitly {
 					url.setShortUrl(value);
 				} else if("global_hash".equals(name)) {
 					url.setGlobalHash(value);
+				} else if("user_hash".equals(name)) {
+					url.setUserHash(value);
 				} else if("hash".equals(name)) {
 					url.setHash(value);
-				} //user_hash
+				}
 			}
 			return url;
+		}
+		
+		/**
+		 * @param p
+		 * @return
+		 */
+		private static String hashOrUrl(String p) {
+			return p.startsWith("http://") ? "shortUrl" : "hash";
+		}
+
+		private static Info parseInfo(Node nl) {
+			NodeList il = nl.getChildNodes();
+			
+			String title = "", createdBy = "";
+			
+			for(int i = 0; i < il.getLength(); i ++) {
+				Node n = il.item(i);
+				
+				String name = n.getNodeName();
+				String value = n.getTextContent();
+				
+				if("created_by".equals(name)) {
+					createdBy = value;
+				} else if("title".equals(name)) {
+					title = value;
+				}
+				
+			}
+			
+			return new Info(parseUrl(nl), createdBy, title);
+		}
+		
+		public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put(hashOrUrl(string), string);
+			return new Clicks(hashMap);
 		}
 		
 	}

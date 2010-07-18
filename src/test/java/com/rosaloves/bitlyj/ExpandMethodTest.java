@@ -32,14 +32,14 @@ public class ExpandMethodTest {
 	}
 
 	@Test
-	public void singleHashArgument() {
+	public void buildWithSingleHashArgument() {
 		BitlyMethod<Set<Url>> url = expand("j3");
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals("j3", url.getParameters().get("hash"));
 	}
 	
 	@Test
-	public void singleUrlArgument() {
+	public void buildWithSingleUrlArgument() {
 		BitlyMethod<Set<Url>> url = expand("http://bit.ly/1YKMfY");
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals("http://bit.ly/1YKMfY", url.getParameters().get("shortUrl"));
@@ -47,7 +47,10 @@ public class ExpandMethodTest {
 	
 	@Test
 	public void applyToDocument() {
-		Url url = expand("http://bit.ly/1YKMfY").apply(doc).iterator().next();
+		Url url = expand("j3").apply(doc).iterator().next();
+		
 		assertEquals("lLWr", url.getGlobalHash());
+		assertEquals("j3", url.getUserHash());
+		assertEquals("http://www.scotster.com/qf/?1152", url.getLongUrl());
 	}
 }

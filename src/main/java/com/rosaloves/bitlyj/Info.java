@@ -12,22 +12,38 @@ public class Info {
 	
 	private final Url url;
 	
-	public Info(Url url) {
+	private final String createdBy;
+	
+	private final String title;
+
+	/**
+	 * @param url
+	 * @param createdBy
+	 * @param title
+	 */
+	public Info(Url url, String createdBy, String title) {
 		super();
 		this.url = url;
+		this.createdBy = createdBy;
+		this.title = title;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public Url getUrl() {
 		return url;
 	}
 
-	public String getLongUrl() {
-		return url.getLongUrl();
-	}
-
 	@Override
 	public String toString() {
-		return "Info [url=" + url + "]";
+		return "Info [createdBy=" + createdBy + ", title=" + title + ", url="
+				+ url + "]";
 	}
 
 }

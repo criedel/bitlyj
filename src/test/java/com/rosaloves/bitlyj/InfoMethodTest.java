@@ -35,24 +35,32 @@ public class InfoMethodTest {
 	}
 
 	@Test
-	public void singleHashArgument() {
+	public void buildWithSingleHashArgument() {
 		BitlyMethod<Set<Info>> info = info("abc");
 		Assert.assertTrue(info.getParameters().size() == 1);
 		Assert.assertEquals("abc", info.getParameters().get("hash"));
 	}
 	
 	@Test
-	public void singleUrlArgument() {
+	public void buildWithSingleUrlArgument() {
 		BitlyMethod<Set<Info>> info = info("http://shortened.com");
 		Assert.assertTrue(info.getParameters().size() == 1);
 		Assert.assertEquals("http://shortened.com", info.getParameters().get("shortUrl"));
 	}
 	
 	@Test
-	public void applyToDocument() {
-		Set<Info> infos = info("http://tcrn.ch/a4MSUH").apply(doc);
-		Url info = infos.iterator().next().getUrl();
-		assertEquals("bWw49z", info.getGlobalHash());
+	public void infoResultParsing() {
+		Info info = info("http://tcrn.ch/a4MSUH").apply(doc).iterator().next();
+		assertEquals("j3h14h", info.getCreatedBy());
+		assertEquals("Windows Mobile Finally Checks Out Foursquare", info.getTitle());
+	}
+	
+	@Test
+	public void urlResultParsing() {
+		Url url = info("http://tcrn.ch/a4MSUH").apply(doc).iterator().next().getUrl();
+		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
+		assertEquals("bWw49z", url.getGlobalHash());
+		assertEquals("a4MSUH", url.getUserHash());
 	}
 	
 }

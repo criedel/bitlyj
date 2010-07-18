@@ -40,9 +40,10 @@ public class ShortenMethodTest {
 	@Test
 	public void applyToDocument() {
 		Url url = shorten("http://betaworks.com/").apply(doc);
+		
 		assertEquals("1YKMfY", url.getGlobalHash());
-		assertEquals("http://betaworks.com/", url.getLongUrl());
 		assertEquals("cmeH01", url.getHash());
+		assertEquals("http://betaworks.com/", url.getLongUrl());
 		assertEquals("http://bit.ly/cmeH01", url.getShortUrl());
 	}
 }

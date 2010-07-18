@@ -12,6 +12,8 @@ public class Url {
 	
 	private String globalHash;
 	
+	private String userHash;
+	
 	private String hash;
 	
 	private String shortUrl;
@@ -28,6 +30,14 @@ public class Url {
 
 	public void setGlobalHash(String globalHash) {
 		this.globalHash = globalHash;
+	}
+
+	public String getUserHash() {
+		return userHash;
+	}
+
+	public void setUserHash(String userHash) {
+		this.userHash = userHash;
 	}
 
 	public String getShortUrl() {
