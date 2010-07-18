@@ -34,7 +34,7 @@ public class ShortenMethodTest {
 	public void simpleLongUrlParameter() {
 		BitlyMethod<Url> url = shorten("http://betaworks.com/");
 		assertTrue(url.getParameters().size() == 1);
-		assertEquals("http://betaworks.com/", url.getParameters().get("longUrl"));
+		assertEquals("http://betaworks.com/", url.getParameters().get("longUrl").get(0));
 	}
 	
 	@Test

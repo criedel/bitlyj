@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -54,12 +55,17 @@ public class Shortener {
 			.append("&login=").append(user)
 			.append("&apiKey=").append(apiKey)
 			.append("&format=xml");
-		for(Map.Entry<String, String> entry : m.getParameters().entrySet()) {
-			try {
-				sb.append("&" + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
+		for(Map.Entry<String, List<String>> entry : m.getParameters()) {
+			
+			for(String value : entry.getValue()) {
+				try {
+					sb.append("&" + entry.getKey() + "=" + URLEncoder.encode(value, "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					throw new RuntimeException(e);
+				}				
 			}
+			
+
 		}
 		return sb.toString();
 	}

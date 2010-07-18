@@ -4,6 +4,9 @@ import static com.rosaloves.bitlyj.Bitly.expand;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Set;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -33,14 +36,28 @@ public class ExpandMethodTest {
 	public void buildWithSingleHashArgument() {
 		BitlyMethod<Url> url = expand("j3");
 		assertTrue(url.getParameters().size() == 1);
-		assertEquals("j3", url.getParameters().get("hash"));
+		assertEquals("j3", url.getParameters().get("hash").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleHashArguments() {
+		BitlyMethod<Set<Url>> url = expand("j3", "a3.");
+		assertTrue(url.getParameters().size() == 1);
+		Assert.assertEquals(2, url.getParameters().get("hash").size());
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
 		BitlyMethod<Url> url = expand("http://bit.ly/1YKMfY");
 		assertTrue(url.getParameters().size() == 1);
-		assertEquals("http://bit.ly/1YKMfY", url.getParameters().get("shortUrl"));
+		assertEquals("http://bit.ly/1YKMfY", url.getParameters().get("shortUrl").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleUrlArguments() {
+		BitlyMethod<Set<Url>> url = expand("http://bit.ly/1YKMfY", "http://foo");
+		assertTrue(url.getParameters().size() == 1);
+		Assert.assertEquals(2, url.getParameters().get("shortUrl").size());
 	}
 	
 	@Test

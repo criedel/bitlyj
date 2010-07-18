@@ -40,5 +40,9 @@ public final class Bitly {
 	public static BitlyMethod<UrlClicks> clicks(String string) {
 		return Methods.clicks(string);
 	}
+	
+	public static BitlyMethod<Set<UrlClicks>> clicks(String ... string) {
+		return Methods.clicks(string);
+	}
 
 }

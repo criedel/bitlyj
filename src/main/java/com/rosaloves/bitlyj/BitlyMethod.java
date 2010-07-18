@@ -1,9 +1,5 @@
 package com.rosaloves.bitlyj;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.w3c.dom.Document;
 
 /**
@@ -18,11 +14,11 @@ public abstract class BitlyMethod<A> {
 	
 	private final String name;
 	
-	private final Map<String, String> parameters;
+	private final ParameterMap parameters;
 	
-	public BitlyMethod(String name, Map<String, String> parameters) {
+	public BitlyMethod(String name, ParameterMap parameters) {
 		this.name = name;
-		this.parameters = Collections.unmodifiableMap(parameters);
+		this.parameters = parameters;
 	}
 	
 	protected BitlyMethod(String name, String ... parameters) {
@@ -30,9 +26,9 @@ public abstract class BitlyMethod<A> {
 		
 		//if(parameters.length % 2 != 0)
 		
-		Map<String, String> p = new HashMap<String, String>();
+		ParameterMap p = new ParameterMap();
 		for(int i = 0; i < parameters.length; i += 2)
-			p.put(parameters[i], parameters[i + 1]);
+			p.add(parameters[i], parameters[i + 1]);
 		
 		this.parameters = p;
 	}
@@ -42,7 +38,7 @@ public abstract class BitlyMethod<A> {
 	}
 
 	/* Subject to change - maps dont support duplicate keys */
-	Map<String, String> getParameters() {
+	ParameterMap getParameters() {
 		return parameters;
 	}
 

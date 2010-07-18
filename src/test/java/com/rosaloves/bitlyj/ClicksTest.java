@@ -4,6 +4,8 @@ import static com.rosaloves.bitlyj.Bitly.clicks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -33,14 +35,28 @@ public class ClicksTest {
 	public void buildWithSingleHashArgument() {
 		BitlyMethod<UrlClicks> url = clicks("t");
 		assertTrue(url.getParameters().size() == 1);
-		assertEquals("t", url.getParameters().get("hash"));
+		assertEquals("t", url.getParameters().get("hash").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleHashArguments() {
+		BitlyMethod<Set<UrlClicks>> url = clicks("t", "t2");
+		assertTrue(url.getParameters().size() == 1);
+		assertEquals(2, url.getParameters().get("hash").size());
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
 		BitlyMethod<UrlClicks> url = clicks("http://tcrn.ch/a4MSUH");
 		assertTrue(url.getParameters().size() == 1);
-		assertEquals("http://tcrn.ch/a4MSUH", url.getParameters().get("shortUrl"));
+		assertEquals("http://tcrn.ch/a4MSUH", url.getParameters().get("shortUrl").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleUrlArguments() {
+		BitlyMethod<Set<UrlClicks>> url = clicks("http://foo1", "http://foo2");
+		assertTrue(url.getParameters().size() == 1);
+		assertEquals(2, url.getParameters().get("shortUrl").size());
 	}
 	
 	@Test

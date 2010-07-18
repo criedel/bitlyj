@@ -4,6 +4,8 @@ import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.info;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Set;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,14 +38,26 @@ public class InfoMethodTest {
 	public void buildWithSingleHashArgument() {
 		BitlyMethod<Info> info = info("abc");
 		Assert.assertTrue(info.getParameters().size() == 1);
-		Assert.assertEquals("abc", info.getParameters().get("hash"));
+		Assert.assertEquals("abc", info.getParameters().get("hash").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleHashArguments() {
+		BitlyMethod<Set<Info>> infos = info("j3", "a3.");
+		Assert.assertEquals(2, infos.getParameters().get("hash").size());
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
 		BitlyMethod<Info> info = info("http://shortened.com");
 		Assert.assertTrue(info.getParameters().size() == 1);
-		Assert.assertEquals("http://shortened.com", info.getParameters().get("shortUrl"));
+		Assert.assertEquals("http://shortened.com", info.getParameters().get("shortUrl").get(0));
+	}
+	
+	@Test
+	public void buildWithMultipleUrlArguments() {
+		BitlyMethod<Set<Info>> infos = info("http://shortened.com", "http://foo.com");
+		Assert.assertEquals(2, infos.getParameters().get("shortUrl").size());
 	}
 	
 	@Test
