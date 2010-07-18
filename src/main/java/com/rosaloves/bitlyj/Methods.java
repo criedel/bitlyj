@@ -67,7 +67,7 @@ public final class Methods {
 		};
 	}
 	
-	private static HashMap<String, String> getUrlMethodParams(String... value) {
+	static HashMap<String, String> getUrlMethodParams(String... value) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		
 		for(String p : value) {
@@ -106,11 +106,11 @@ public final class Methods {
 	 * @param p
 	 * @return
 	 */
-	private static String hashOrUrl(String p) {
+	static String hashOrUrl(String p) {
 		return p.startsWith("http://") ? "shortUrl" : "hash";
 	}
 
-	private static Info parseInfo(Node nl) {
+	static Info parseInfo(Node nl) {
 		NodeList il = nl.getChildNodes();
 		
 		String title = "", createdBy = "";
