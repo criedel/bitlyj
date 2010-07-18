@@ -8,6 +8,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.rosaloves.bitlyj.utils.Dom;
+
 
 /**
  * Methods
@@ -99,31 +101,7 @@ public final class Methods {
 		
 	}
 	
-	static String getTextContent(Node n) {
-		StringBuffer sb = new StringBuffer(); 
-		NodeList nl = n.getChildNodes(); 
-		for (int i = 0; i < nl.getLength(); i++) { 
-		    Node child = nl.item(i); 
-		    if (child.getNodeType() == Node.TEXT_NODE) 
-		    	sb.append(child.getNodeValue()); 
-		}
-		return sb.toString();
-	}
-	
-	static UrlClicks parseClicks(Node item) {
-		NodeList nl = item.getChildNodes();
-		long user = 0, global = 0;
-		for(int i = 0; i < nl.getLength(); i++) {
-			String name = nl.item(i).getNodeName();
-			String value = getTextContent(nl.item(i));
-			if("user_clicks".equals(name)) {
-				user = Long.parseLong(value);
-			} else if("global_clicks".equals(name)) {
-				global = Long.parseLong(value);
-			}
-		}
-		return new UrlClicks(Methods.parseUrl(item), user, global);
-	}
+	/* Package-private parsing aids. */
 	
 	static HashMap<String, String> getUrlMethodParams(String... value) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
@@ -133,6 +111,25 @@ public final class Methods {
 		}
 		return hashMap;
 	}
+	
+	static String hashOrUrl(String p) {
+		return p.startsWith("http://") ? "shortUrl" : "hash";
+	}
+	
+	static UrlClicks parseClicks(Node item) {
+		NodeList nl = item.getChildNodes();
+		long user = 0, global = 0;
+		for(int i = 0; i < nl.getLength(); i++) {
+			String name = nl.item(i).getNodeName();
+			String value = Dom.getTextContent(nl.item(i));
+			if("user_clicks".equals(name)) {
+				user = Long.parseLong(value);
+			} else if("global_clicks".equals(name)) {
+				global = Long.parseLong(value);
+			}
+		}
+		return new UrlClicks(Methods.parseUrl(item), user, global);
+	}
 
 	static Url parseUrl(Node nl) {
 		Url url = new Url();
@@ -141,7 +138,7 @@ public final class Methods {
 			
 			Node n = il.item(i);
 			String name = n.getNodeName();
-			String value = getTextContent(n);
+			String value = Dom.getTextContent(n);
 			
 			if("short_url".equals(name)) {
 				url.setShortUrl(value);
@@ -160,10 +157,6 @@ public final class Methods {
 		return url;
 	}
 	
-	static String hashOrUrl(String p) {
-		return p.startsWith("http://") ? "shortUrl" : "hash";
-	}
-
 	static Info parseInfo(Node nl) {
 		NodeList il = nl.getChildNodes();
 		
@@ -173,7 +166,7 @@ public final class Methods {
 			Node n = il.item(i);
 			
 			String name = n.getNodeName();
-			String value = getTextContent(n);
+			String value = Dom.getTextContent(n);
 			
 			if("created_by".equals(name)) {
 				createdBy = value;

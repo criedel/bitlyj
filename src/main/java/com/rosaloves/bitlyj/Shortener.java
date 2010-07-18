@@ -12,6 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.rosaloves.bitlyj.utils.Dom;
+
 /**
  * Shortener
  * 
@@ -70,11 +72,11 @@ public class Shortener {
 			throw new BitlyException("Unexpected response (no status and/or message)!");
 		}
 		
-		int code = Integer.parseInt(Methods.getTextContent(statusCode));
+		int code = Integer.parseInt(Dom.getTextContent(statusCode));
 		if(code == 200)
 			return doc;
 		else {
-			throw new BitlyException(Methods.getTextContent(statusText));
+			throw new BitlyException(Dom.getTextContent(statusText));
 		}
 	}
 	
