@@ -17,11 +17,19 @@ public final class Bitly {
 		return new Shortener(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
-	public static BitlyMethod<Set<Info>> info(String value) {
+	public static BitlyMethod<Info> info(String value) {
 		return Methods.info(value);
 	}
 	
-	public static BitlyMethod<Set<Url>> expand(String value) {
+	public static BitlyMethod<Set<Info>> info(String ... value) {
+		return Methods.info(value);
+	}
+	
+	public static BitlyMethod<Url> expand(String value) {
+		return Methods.expand(value);
+	}
+	
+	public static BitlyMethod<Set<Url>> expand(String ... value) {
 		return Methods.expand(value);
 	}
 	
@@ -29,7 +37,7 @@ public final class Bitly {
 		return Methods.shorten(longUrl);
 	}
 	
-	public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
+	public static BitlyMethod<UrlClicks> clicks(String string) {
 		return Methods.clicks(string);
 	}
 

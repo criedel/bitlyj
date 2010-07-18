@@ -4,8 +4,6 @@ import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.info;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,28 +34,28 @@ public class InfoMethodTest {
 
 	@Test
 	public void buildWithSingleHashArgument() {
-		BitlyMethod<Set<Info>> info = info("abc");
+		BitlyMethod<Info> info = info("abc");
 		Assert.assertTrue(info.getParameters().size() == 1);
 		Assert.assertEquals("abc", info.getParameters().get("hash"));
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
-		BitlyMethod<Set<Info>> info = info("http://shortened.com");
+		BitlyMethod<Info> info = info("http://shortened.com");
 		Assert.assertTrue(info.getParameters().size() == 1);
 		Assert.assertEquals("http://shortened.com", info.getParameters().get("shortUrl"));
 	}
 	
 	@Test
 	public void infoResultParsing() {
-		Info info = info("http://tcrn.ch/a4MSUH").apply(doc).iterator().next();
+		Info info = info("http://tcrn.ch/a4MSUH").apply(doc);
 		assertEquals("j3h14h", info.getCreatedBy());
 		assertEquals("Windows Mobile Finally Checks Out Foursquare", info.getTitle());
 	}
 	
 	@Test
 	public void urlResultParsing() {
-		Url url = info("http://tcrn.ch/a4MSUH").apply(doc).iterator().next().getUrl();
+		Url url = info("http://tcrn.ch/a4MSUH").apply(doc).getUrl();
 		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
 		assertEquals("bWw49z", url.getGlobalHash());
 		assertEquals("a4MSUH", url.getUserHash());

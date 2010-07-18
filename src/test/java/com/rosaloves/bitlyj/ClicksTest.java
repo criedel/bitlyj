@@ -4,8 +4,6 @@ import static com.rosaloves.bitlyj.Bitly.clicks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -33,14 +31,14 @@ public class ClicksTest {
 
 	@Test
 	public void buildWithSingleHashArgument() {
-		BitlyMethod<Set<UrlClicks>> url = clicks("t");
+		BitlyMethod<UrlClicks> url = clicks("t");
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals("t", url.getParameters().get("hash"));
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
-		BitlyMethod<Set<UrlClicks>> url = clicks("http://tcrn.ch/a4MSUH");
+		BitlyMethod<UrlClicks> url = clicks("http://tcrn.ch/a4MSUH");
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals("http://tcrn.ch/a4MSUH", url.getParameters().get("shortUrl"));
 	}
@@ -55,7 +53,7 @@ public class ClicksTest {
 	
 	@Test
 	public void clickResultParsing() {
-		UrlClicks clicks = clicks("http://tcrn.ch/a4MSUH").apply(doc).iterator().next();
+		UrlClicks clicks = clicks("http://tcrn.ch/a4MSUH").apply(doc);
 		
 		assertEquals(0, clicks.getUserClicks());
 		assertEquals(1105, clicks.getGlobalClicks());
@@ -64,7 +62,7 @@ public class ClicksTest {
 	
 	@Test
 	public void urlResultParsing() {
-		Url url = clicks("http://tcrn.ch/a4MSUH").apply(doc).iterator().next().getUrl();
+		Url url = clicks("http://tcrn.ch/a4MSUH").apply(doc).getUrl();
 		
 		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
 		assertEquals("bWw49z", url.getGlobalHash());

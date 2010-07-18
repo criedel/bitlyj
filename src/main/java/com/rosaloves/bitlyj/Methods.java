@@ -18,28 +18,46 @@ import org.w3c.dom.NodeList;
  *
  */
 public final class Methods {
-		
-	public static BitlyMethod<Set<Info>> info(String value) {
+	
+	public static BitlyMethod<Info> info(String value) {
+		HashMap<String, String> hashMap = getUrlMethodParams(value);
+		return new BitlyMethod<Info>("info", hashMap) {
+			@Override
+			public Info apply(Document document) {
+				return parseInfo(document.getElementsByTagName("info").item(0));
+			}
+		};
+	}
+	
+	public static BitlyMethod<Set<Info>> info(String ... value) {
 		HashMap<String, String> hashMap = getUrlMethodParams(value);
 		return new BitlyMethod<Set<Info>>("info", hashMap) {
 			@Override
 			public Set<Info> apply(Document document) {
-				
 				HashSet<Info> inf = new HashSet<Info>();
-				
 				NodeList infos = document.getElementsByTagName("info");
 				for(int i = 0; i < infos.getLength(); i ++) {
 					inf.add(parseInfo(infos.item(i)));
 				}
-				
 				return inf;
 			}
 		};
 	}
 	
-	public static BitlyMethod<Set<Url>> expand(String values) {
+	public static BitlyMethod<Url> expand(String values) {
+		HashMap<String, String> hashMap = getUrlMethodParams(values);
+		return new BitlyMethod<Url>("expand", hashMap) {
+			@Override
+			public Url apply(Document document) {
+				return parseUrl(document.getElementsByTagName("entry").item(0));
+			}
+		};
+	}
+	
+	public static BitlyMethod<Set<Url>> expand(String ... values) {
 		HashMap<String, String> hashMap = getUrlMethodParams(values);
 		return new BitlyMethod<Set<Url>>("expand", hashMap) {
+			
 			@Override
 			public Set<Url> apply(Document document) {
 				
@@ -54,7 +72,7 @@ public final class Methods {
 			}
 		};
 	}
-	
+
 	public static BitlyMethod<Url> shorten(String longUrl) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("longUrl", longUrl);
@@ -67,39 +85,33 @@ public final class Methods {
 		};
 	}
 	
-	public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
+	public static BitlyMethod<UrlClicks> clicks(String string) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put(hashOrUrl(string), string);
 		
-		return new BitlyMethod<Set<UrlClicks>>("clicks", hashMap) {
+		return new BitlyMethod<UrlClicks>("clicks", hashMap) {
 			@Override
-			public Set<UrlClicks> apply(Document document) {
-				NodeList nl = document.getElementsByTagName("clicks");
-				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
-				
-				for(int i = 0; i < nl.getLength(); i++) {
-					clicks.add(parseClicks(nl.item(i)));
-				}
-				
-				return clicks;
+			public UrlClicks apply(Document document) {
+				return parseClicks(document.getElementsByTagName("clicks").item(0));
 			}
 
-			private UrlClicks parseClicks(Node item) {
-				NodeList nl = item.getChildNodes();
-				long user = 0, global = 0;
-				for(int i = 0; i < nl.getLength(); i++) {
-					String name = nl.item(i).getNodeName();
-					String value = nl.item(i).getTextContent();
-					if("user_clicks".equals(name)) {
-						user = Long.parseLong(value);
-					} else if("global_clicks".equals(name)) {
-						global = Long.parseLong(value);
-					}
-				}
-				return new UrlClicks(Methods.parseUrl(item), user, global);
-			}
 		};
 		
+	}
+	
+	static UrlClicks parseClicks(Node item) {
+		NodeList nl = item.getChildNodes();
+		long user = 0, global = 0;
+		for(int i = 0; i < nl.getLength(); i++) {
+			String name = nl.item(i).getNodeName();
+			String value = nl.item(i).getTextContent();
+			if("user_clicks".equals(name)) {
+				user = Long.parseLong(value);
+			} else if("global_clicks".equals(name)) {
+				global = Long.parseLong(value);
+			}
+		}
+		return new UrlClicks(Methods.parseUrl(item), user, global);
 	}
 	
 	static HashMap<String, String> getUrlMethodParams(String... value) {
