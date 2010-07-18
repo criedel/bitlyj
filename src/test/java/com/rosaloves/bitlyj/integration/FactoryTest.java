@@ -12,7 +12,6 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.rosaloves.bitlyj.BitlyService;
-import com.rosaloves.bitlyj.Info;
 import com.rosaloves.bitlyj.Url;
 
 /**
@@ -30,7 +29,6 @@ public class FactoryTest {
 	@Test
 	public void testShorten() {
 		Url url = bitly.call(shorten("http://www.scotster.com/qf/?1152"));
-		System.out.println("Factory.testShorten() " + url);
 		assertEquals("lLWr", url.getGlobalHash());
 		assertEquals("http://www.scotster.com/qf/?1152", url.getLongUrl());
 		
@@ -40,6 +38,7 @@ public class FactoryTest {
 	public void testExpand() {
 		Set<Url> urls = bitly.call(expand("j3"));
 		assertTrue(urls.size() == 1);
+		
 		Url url = urls.iterator().next();
 		assertEquals("lLWr", url.getGlobalHash());
 		assertEquals("j3", url.getHash());
@@ -49,8 +48,7 @@ public class FactoryTest {
 	
 	@Test
 	public void testInfo() {
-		Info info = bitly.call(info("j3")).iterator().next();
-		Url url = info.getUrl();
+		Url url = bitly.call(info("j3")).iterator().next().getUrl();
 		assertEquals("lLWr", url.getGlobalHash());
 		assertEquals("j3", url.getHash());
 	}
