@@ -39,4 +39,11 @@ public class UrlClicks {
 		return globalClicks;
 	}
 
+	@Override
+	public String toString() {
+		return "UrlClicks [globalClicks=" + globalClicks 
+				+ ", userClicks=" + userClicks + ", url=" + url + "]";
+	}
+
+	
 }
