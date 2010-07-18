@@ -34,6 +34,10 @@ public class UrlClicks {
 	public long getGlobalClicks() {
 		return globalClicks;
 	}
+	
+	public long getTotalClicks() {
+		return userClicks + globalClicks;
+	}
 
 	@Override
 	public String toString() {

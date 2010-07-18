@@ -46,11 +46,20 @@ public class ClicksTest {
 	}
 	
 	@Test
+	public void clickResultSums() {
+		UrlClicks clicks = new UrlClicks(new Url(), 1, 2);
+		assertEquals(1, clicks.getUserClicks());
+		assertEquals(2, clicks.getGlobalClicks());
+		assertEquals(3, clicks.getTotalClicks());
+	}
+	
+	@Test
 	public void clickResultParsing() {
 		UrlClicks clicks = clicks("http://tcrn.ch/a4MSUH").apply(doc).iterator().next();
 		
 		assertEquals(0, clicks.getUserClicks());
 		assertEquals(1105, clicks.getGlobalClicks());
+		assertEquals(1105, clicks.getTotalClicks());
 	}
 	
 	@Test
