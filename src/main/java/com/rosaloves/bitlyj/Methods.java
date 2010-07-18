@@ -67,6 +67,41 @@ public final class Methods {
 		};
 	}
 	
+	public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put(hashOrUrl(string), string);
+		
+		return new BitlyMethod<Set<UrlClicks>>("clicks", hashMap) {
+			@Override
+			public Set<UrlClicks> apply(Document document) {
+				NodeList nl = document.getElementsByTagName("clicks");
+				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
+				
+				for(int i = 0; i < nl.getLength(); i++) {
+					clicks.add(parseClicks(nl.item(i)));
+				}
+				
+				return clicks;
+			}
+
+			private UrlClicks parseClicks(Node item) {
+				NodeList nl = item.getChildNodes();
+				long user = 0, global = 0;
+				for(int i = 0; i < nl.getLength(); i++) {
+					String name = nl.item(i).getNodeName();
+					String value = nl.item(i).getTextContent();
+					if("user_clicks".equals(name)) {
+						user = Long.parseLong(value);
+					} else if("global_clicks".equals(name)) {
+						global = Long.parseLong(value);
+					}
+				}
+				return new UrlClicks(Methods.parseUrl(item), user, global);
+			}
+		};
+		
+	}
+	
 	static HashMap<String, String> getUrlMethodParams(String... value) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		
@@ -102,10 +137,6 @@ public final class Methods {
 		return url;
 	}
 	
-	/**
-	 * @param p
-	 * @return
-	 */
 	static String hashOrUrl(String p) {
 		return p.startsWith("http://") ? "shortUrl" : "hash";
 	}
@@ -130,45 +161,6 @@ public final class Methods {
 		}
 		
 		return new Info(parseUrl(nl), createdBy, title);
-	}
-	
-	public static BitlyMethod<Set<UrlClicks>> clicks(String string) {
-		HashMap<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put(hashOrUrl(string), string);
-		
-		return new BitlyMethod<Set<UrlClicks>>("clicks", hashMap) {
-			@Override
-			public Set<UrlClicks> apply(Document document) {
-				NodeList nl = document.getElementsByTagName("clicks");
-				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
-				
-				for(int i = 0; i < nl.getLength(); i++) {
-					clicks.add(parseClicks(nl.item(i)));
-				}
-				
-				return clicks;
-			}
-
-			/**
-			 * @param item
-			 * @return
-			 */
-			private UrlClicks parseClicks(Node item) {
-				NodeList nl = item.getChildNodes();
-				long user = 0, global = 0;
-				for(int i = 0; i < nl.getLength(); i++) {
-					String name = nl.item(i).getNodeName();
-					String value = nl.item(i).getTextContent();
-					if("user_clicks".equals(name)) {
-						user = Long.parseLong(value);
-					} else if("global_clicks".equals(name)) {
-						global = Long.parseLong(value);
-					}
-				}
-				return new UrlClicks(Methods.parseUrl(item), user, global);
-			}
-		};
-		
 	}
 		
 }

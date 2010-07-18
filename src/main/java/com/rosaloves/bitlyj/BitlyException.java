@@ -16,4 +16,8 @@ public class BitlyException extends RuntimeException {
 		super(message);
 	}
 	
+	BitlyException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
 }

@@ -16,10 +16,6 @@ public class UrlClicks {
 	
 	private final Url url;
 
-	/**
-	 * @param userClicks
-	 * @param globalClicks
-	 */
 	public UrlClicks(Url url, long userClicks, long globalClicks) {
 		super();
 		this.url = url;
