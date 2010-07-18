@@ -43,6 +43,7 @@ public class ClicksTest {
 		BitlyMethod<Set<UrlClicks>> url = clicks("t", "t2");
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals(2, url.getParameters().get("hash").size());
+		System.out.println("ClicksTest.buildWithMultipleUrlArguments() " + Bitly.as("rosaloves", "R_63b4916408e824a93ad0da40558bb410").getUrlForCall(url));
 	}
 	
 	@Test
@@ -55,6 +56,7 @@ public class ClicksTest {
 	@Test
 	public void buildWithMultipleUrlArguments() {
 		BitlyMethod<Set<UrlClicks>> url = clicks("http://foo1", "http://foo2");
+		
 		assertTrue(url.getParameters().size() == 1);
 		assertEquals(2, url.getParameters().get("shortUrl").size());
 	}

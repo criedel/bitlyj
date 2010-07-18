@@ -103,7 +103,7 @@ public final class Methods {
 			@Override
 			public Set<UrlClicks> apply(Document document) {
 				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
-				NodeList nl = document.getElementsByTagName("entry");
+				NodeList nl = document.getElementsByTagName("clicks");
 				for(int i = 0; i < nl.getLength(); i ++) {
 					clicks.add(parseClicks(nl.item(i)));
 				}
