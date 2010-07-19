@@ -16,11 +16,9 @@ import java.util.Map.Entry;
  * @author clewis Jul 18, 2010
  *
  */
-public class ParameterMap extends AbstractCollection<Entry<String, List<String>>> {
+class ParameterMap extends AbstractCollection<Entry<String, List<String>>> {
 	
 	private Map<String, List<String>> parameters = new HashMap<String, List<String>>();
-	
-	ParameterMap() {}
 	
 	public void add(String name, String value) {
 		List<String> values = parameters.get(name);

@@ -1,10 +1,7 @@
 package com.rosaloves.bitlyj;
 
-import static com.rosaloves.bitlyj.Bitly.as;
-import static com.rosaloves.bitlyj.Bitly.info;
+import static com.rosaloves.bitlyj.Methods.info;
 import static org.junit.Assert.assertEquals;
-
-import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,34 +27,33 @@ public class InfoMethodTest {
 	
 	@Test
 	public void name() {
-		assertEquals("http://api.bit.ly/v3/info?&login=bitlyapidemo&apiKey=R_0da49e0a9118ff35f52f629d2d71bf07&format=xml&hash=j3", as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07").getUrlForCall(Bitly.info("j3")));
 		Assert.assertEquals("info", info("somehash").getName());
 	}
 
 	@Test
 	public void buildWithSingleHashArgument() {
-		BitlyMethod<Info> info = info("abc");
-		Assert.assertTrue(info.getParameters().size() == 1);
-		Assert.assertEquals("abc", info.getParameters().get("hash").get(0));
+		ParameterMap p = Utils.paramsAsMap(info("abc"));
+		Assert.assertTrue(p.size() == 1);
+		Assert.assertEquals("abc", p.get("hash").get(0));
 	}
 	
 	@Test
 	public void buildWithMultipleHashArguments() {
-		BitlyMethod<Set<Info>> infos = info("j3", "a3.");
-		Assert.assertEquals(2, infos.getParameters().get("hash").size());
+		ParameterMap p = Utils.paramsAsMap(info("j3", "a3."));
+		Assert.assertEquals(2, p.get("hash").size());
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
-		BitlyMethod<Info> info = info("http://shortened.com");
-		Assert.assertTrue(info.getParameters().size() == 1);
-		Assert.assertEquals("http://shortened.com", info.getParameters().get("shortUrl").get(0));
+		ParameterMap p = Utils.paramsAsMap(info("http://shortened.com"));
+		Assert.assertTrue(p.size() == 1);
+		Assert.assertEquals("http://shortened.com", p.get("shortUrl").get(0));
 	}
 	
 	@Test
 	public void buildWithMultipleUrlArguments() {
-		BitlyMethod<Set<Info>> infos = info("http://shortened.com", "http://foo.com");
-		Assert.assertEquals(2, infos.getParameters().get("shortUrl").size());
+		ParameterMap p = Utils.paramsAsMap(info("http://shortened.com", "http://foo.com"));
+		Assert.assertEquals(2, p.get("shortUrl").size());
 	}
 	
 	@Test

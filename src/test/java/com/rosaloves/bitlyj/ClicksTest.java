@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -34,32 +33,30 @@ public class ClicksTest {
 
 	@Test
 	public void buildWithSingleHashArgument() {
-		BitlyMethod<UrlClicks> url = clicks("t");
-		assertTrue(url.getParameters().size() == 1);
-		assertEquals("t", url.getParameters().get("hash").get(0));
+		ParameterMap p = Utils.paramsAsMap(clicks("t"));
+		assertTrue(p.size() == 1);
+		assertEquals("t", p.get("hash").get(0));
 	}
 	
 	@Test
 	public void buildWithMultipleHashArguments() {
-		BitlyMethod<Set<UrlClicks>> url = clicks("t", "t2");
-		assertTrue(url.getParameters().size() == 1);
-		assertEquals(2, url.getParameters().get("hash").size());
-		System.out.println("ClicksTest.buildWithMultipleUrlArguments() " + Bitly.as("rosaloves", "R_63b4916408e824a93ad0da40558bb410").getUrlForCall(url));
+		ParameterMap p = Utils.paramsAsMap(clicks("t", "t2"));
+		assertTrue(p.size() == 1);
+		assertEquals(2, p.get("hash").size());
 	}
 	
 	@Test
 	public void buildWithSingleUrlArgument() {
-		BitlyMethod<UrlClicks> url = clicks("http://tcrn.ch/a4MSUH");
-		assertTrue(url.getParameters().size() == 1);
-		assertEquals("http://tcrn.ch/a4MSUH", url.getParameters().get("shortUrl").get(0));
+		ParameterMap p = Utils.paramsAsMap(clicks("http://tcrn.ch/a4MSUH"));
+		assertTrue(p.size() == 1);
+		assertEquals("http://tcrn.ch/a4MSUH", p.get("shortUrl").get(0));
 	}
 	
 	@Test
 	public void buildWithMultipleUrlArguments() {
-		BitlyMethod<Set<UrlClicks>> url = clicks("http://foo1", "http://foo2");
-		
-		assertTrue(url.getParameters().size() == 1);
-		assertEquals(2, url.getParameters().get("shortUrl").size());
+		ParameterMap p = Utils.paramsAsMap(clicks("http://foo1", "http://foo2"));
+		assertTrue(p.size() == 1);
+		assertEquals(2, p.get("shortUrl").size());
 	}
 	
 	@Test

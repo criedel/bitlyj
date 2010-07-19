@@ -2,51 +2,23 @@ package com.rosaloves.bitlyj;
 
 import org.w3c.dom.Document;
 
+import com.rosaloves.bitlyj.data.Pair;
+
 /**
  * BitlyMethod
  * 
  * $Id$
  * 
- * @author clewis Jul 17, 2010
+ * @author clewis Jul 19, 2010
  *
+ * @param <A>
  */
-public abstract class BitlyMethod<A> {
-	
-	private final String name;
-	
-	private final ParameterMap parameters;
-	
-	public BitlyMethod(String name, ParameterMap parameters) {
-		this.name = name;
-		this.parameters = parameters;
-	}
-	
-	protected BitlyMethod(String name, String ... parameters) {
-		this.name = name;
-		
-		//if(parameters.length % 2 != 0)
-		
-		ParameterMap p = new ParameterMap();
-		for(int i = 0; i < parameters.length; i += 2)
-			p.add(parameters[i], parameters[i + 1]);
-		
-		this.parameters = p;
-	}
-	
-	public String getName() {
-		return name;
-	}
+public interface BitlyMethod<A> {
 
-	/* Subject to change - maps dont support duplicate keys */
-	ParameterMap getParameters() {
-		return parameters;
-	}
+	public String getName();
 
-	@Override
-	public String toString() {
-		return "BitlyMethod [name=" + name + ", parameters=" + parameters + "]";
-	}
+	public Iterable<Pair<String, String>> getParameters();
 
-	public abstract A apply(Document document);
+	public A apply(Document document);
 	
 }

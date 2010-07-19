@@ -11,7 +11,7 @@ package com.rosaloves.bitlyj;
 public class Jmp {
 	
 	public static Shortener as(String user, String apiKey) {
-		return new Shortener(user, apiKey, "http://api.j.mp/v3/");
+		return new SimpleShortener(user, apiKey, "http://api.j.mp/v3/");
 	}
 	
 }

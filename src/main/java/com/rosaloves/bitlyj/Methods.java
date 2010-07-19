@@ -1,12 +1,16 @@
 package com.rosaloves.bitlyj;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.rosaloves.bitlyj.data.Pair;
 import com.rosaloves.bitlyj.utils.Dom;
 
 
@@ -21,8 +25,7 @@ import com.rosaloves.bitlyj.utils.Dom;
 public final class Methods {
 	
 	public static BitlyMethod<Info> info(String value) {
-		ParameterMap hashMap = getUrlMethodParams(value);
-		return new BitlyMethod<Info>("info", hashMap) {
+		return new MethodBase<Info>("info", getUrlMethodArgs(value)) {
 			@Override
 			public Info apply(Document document) {
 				return parseInfo(document.getElementsByTagName("info").item(0));
@@ -31,8 +34,7 @@ public final class Methods {
 	}
 	
 	public static BitlyMethod<Set<Info>> info(String ... values) {
-		ParameterMap hashMap = getUrlMethodParams(values);
-		return new BitlyMethod<Set<Info>>("info", hashMap) {
+		return new MethodBase<Set<Info>>("info", getUrlMethodArgs(values)) {
 			@Override
 			public Set<Info> apply(Document document) {
 				HashSet<Info> inf = new HashSet<Info>();
@@ -46,8 +48,7 @@ public final class Methods {
 	}
 	
 	public static BitlyMethod<Url> expand(String values) {
-		ParameterMap hashMap = getUrlMethodParams(values);
-		return new BitlyMethod<Url>("expand", hashMap) {
+		return new MethodBase<Url>("expand", getUrlMethodArgs(values)) {
 			@Override
 			public Url apply(Document document) {
 				return parseUrl(document.getElementsByTagName("entry").item(0));
@@ -56,8 +57,7 @@ public final class Methods {
 	}
 	
 	public static BitlyMethod<Set<Url>> expand(String ... values) {
-		ParameterMap hashMap = getUrlMethodParams(values);
-		return new BitlyMethod<Set<Url>>("expand", hashMap) {
+		return new MethodBase<Set<Url>>("expand", getUrlMethodArgs(values)) {
 			
 			@Override
 			public Set<Url> apply(Document document) {
@@ -75,9 +75,7 @@ public final class Methods {
 	}
 
 	public static BitlyMethod<Url> shorten(String longUrl) {
-		ParameterMap hashMap = new ParameterMap();
-		hashMap.add("longUrl", longUrl);
-		return new BitlyMethod<Url>("shorten", hashMap) {
+		return new MethodBase<Url>("shorten", Pair.p("longUrl", longUrl)) {
 			@Override
 			public Url apply(Document document) {
 				NodeList infos = document.getElementsByTagName("data");
@@ -87,9 +85,7 @@ public final class Methods {
 	}
 	
 	public static BitlyMethod<UrlClicks> clicks(String string) {
-		ParameterMap hashMap = new ParameterMap();
-		hashMap.add(hashOrUrl(string), string);
-		return new BitlyMethod<UrlClicks>("clicks", hashMap) {
+		return new MethodBase<UrlClicks>("clicks", Pair.p(hashOrUrl(string), string)) {
 			@Override
 			public UrlClicks apply(Document document) {
 				return parseClicks(document.getElementsByTagName("clicks").item(0));
@@ -98,8 +94,7 @@ public final class Methods {
 	}
 	
 	public static BitlyMethod<Set<UrlClicks>> clicks(String ... string) {
-		ParameterMap hashMap = getUrlMethodParams(string);
-		return new BitlyMethod<Set<UrlClicks>>("clicks", hashMap) {
+		return new MethodBase<Set<UrlClicks>>("clicks", getUrlMethodArgs(string)) {
 			@Override
 			public Set<UrlClicks> apply(Document document) {
 				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
@@ -113,13 +108,14 @@ public final class Methods {
 	}
 	
 	/* Package-private parsing aids. */
+	
 	//TODO this is a util - move it
-	static ParameterMap getUrlMethodParams(String... value) {
-		ParameterMap pMap = new ParameterMap();
+	static Collection<Pair<String, String>> getUrlMethodArgs(String... value) {
+		List<Pair<String, String>> pairs = new ArrayList<Pair<String,String>>();
 		for(String p : value) {
-			pMap.add(hashOrUrl(p), p);			
+			pairs.add(Pair.p(hashOrUrl(p), p));			
 		}
-		return pMap;
+		return pairs;
 	}
 	
 	static String hashOrUrl(String p) {

@@ -2,7 +2,6 @@ package com.rosaloves.bitlyj;
 
 import java.util.Set;
 
-
 /**
  * Bitly
  * 
@@ -14,7 +13,7 @@ import java.util.Set;
 public final class Bitly {
 	
 	public static Shortener as(String user, String apiKey) {
-		return new Shortener(user, apiKey, "http://api.bit.ly/v3/");
+		return new SimpleShortener(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
 	public static BitlyMethod<Info> info(String value) {
