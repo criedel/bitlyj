@@ -31,5 +31,10 @@ public final class Pair<A, B> {
 	public B getTwo() {
 		return two;
 	}
+
+	@Override
+	public String toString() {
+		return "Pair [one=" + one + ", two=" + two + "]";
+	}
 	
 }
