@@ -12,8 +12,14 @@ import java.util.Set;
  */
 public final class Bitly {
 	
-	public static Shortener as(String user, String apiKey) {
-		return new SimpleShortener(user, apiKey, "http://api.bit.ly/v3/");
+	public static interface Provider {
+		
+		public abstract <A> A call(BitlyMethod<A> m);
+		
+	}
+	
+	public static Provider as(String user, String apiKey) {
+		return new SimpleProvider(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
 	public static BitlyMethod<Info> info(String value) {

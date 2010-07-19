@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.rosaloves.bitlyj.Shortener;
 import com.rosaloves.bitlyj.Url;
+import com.rosaloves.bitlyj.Bitly.Provider;
 
 /**
  * Factory
@@ -21,7 +21,7 @@ import com.rosaloves.bitlyj.Url;
  */
 public class FactoryTest {
 	
-	Shortener bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
+	Provider bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	
 	@Test
 	public void testShorten() {

@@ -1,5 +1,7 @@
 package com.rosaloves.bitlyj;
 
+import com.rosaloves.bitlyj.Bitly.Provider;
+
 /**
  * Jmp
  * 
@@ -10,8 +12,8 @@ package com.rosaloves.bitlyj;
  */
 public class Jmp {
 	
-	public static Shortener as(String user, String apiKey) {
-		return new SimpleShortener(user, apiKey, "http://api.j.mp/v3/");
+	public static Provider as(String user, String apiKey) {
+		return new SimpleProvider(user, apiKey, "http://api.j.mp/v3/");
 	}
 	
 }

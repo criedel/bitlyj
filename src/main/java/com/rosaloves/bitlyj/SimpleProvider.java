@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.rosaloves.bitlyj.Bitly.Provider;
 import com.rosaloves.bitlyj.data.Pair;
 import com.rosaloves.bitlyj.utils.Dom;
 
@@ -22,7 +23,7 @@ import com.rosaloves.bitlyj.utils.Dom;
  * @author clewis Jul 17, 2010
  *
  */
-class SimpleShortener implements Shortener {
+class SimpleProvider implements Provider {
 	
 	private final String user;
 	
@@ -30,7 +31,7 @@ class SimpleShortener implements Shortener {
 	
 	private final String endPoint;
 
-	SimpleShortener(String user, String apiKey, String endPoint) {
+	SimpleProvider(String user, String apiKey, String endPoint) {
 		super();
 		this.user = user;
 		this.apiKey = apiKey;
@@ -45,7 +46,7 @@ class SimpleShortener implements Shortener {
 	
 	@Override
 	public String toString() {
-		return "SimpleShortener [endPoint=" + endPoint + "]";
+		return "SimpleProvider [endPoint=" + endPoint + "]";
 	}
 
 	protected String getUrlForCall(BitlyMethod<?> m) {
