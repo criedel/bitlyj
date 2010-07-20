@@ -22,11 +22,11 @@ public final class Bitly {
 		return new SimpleProvider(user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
-	public static BitlyMethod<Info> info(String value) {
+	public static BitlyMethod<UrlInfo> info(String value) {
 		return Methods.info(value);
 	}
 	
-	public static BitlyMethod<Set<Info>> info(String ... value) {
+	public static BitlyMethod<Set<UrlInfo>> info(String ... value) {
 		return Methods.info(value);
 	}
 	

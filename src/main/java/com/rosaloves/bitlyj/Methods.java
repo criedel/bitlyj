@@ -25,20 +25,20 @@ import com.rosaloves.bitlyj.utils.Dom;
  */
 public final class Methods {
 	
-	public static BitlyMethod<Info> info(String value) {
-		return new MethodBase<Info>("info", getUrlMethodArgs(value)) {
+	public static BitlyMethod<UrlInfo> info(String value) {
+		return new MethodBase<UrlInfo>("info", getUrlMethodArgs(value)) {
 			@Override
-			public Info apply(Document document) {
+			public UrlInfo apply(Document document) {
 				return parseInfo(document.getElementsByTagName("info").item(0));
 			}
 		};
 	}
 	
-	public static BitlyMethod<Set<Info>> info(String ... values) {
-		return new MethodBase<Set<Info>>("info", getUrlMethodArgs(values)) {
+	public static BitlyMethod<Set<UrlInfo>> info(String ... values) {
+		return new MethodBase<Set<UrlInfo>>("info", getUrlMethodArgs(values)) {
 			@Override
-			public Set<Info> apply(Document document) {
-				HashSet<Info> inf = new HashSet<Info>();
+			public Set<UrlInfo> apply(Document document) {
+				HashSet<UrlInfo> inf = new HashSet<UrlInfo>();
 				NodeList infos = document.getElementsByTagName("info");
 				for(int i = 0; i < infos.getLength(); i ++) {
 					inf.add(parseInfo(infos.item(i)));
@@ -164,7 +164,7 @@ public final class Methods {
 		return url;
 	}
 	
-	static Info parseInfo(Node nl) {
+	static UrlInfo parseInfo(Node nl) {
 		NodeList il = nl.getChildNodes();
 		
 		String title = "", createdBy = "";
@@ -183,7 +183,7 @@ public final class Methods {
 			
 		}
 		
-		return new Info(parseUrl(nl), createdBy, title);
+		return new UrlInfo(parseUrl(nl), createdBy, title);
 	}
 		
 }

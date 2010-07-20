@@ -58,7 +58,7 @@ public class InfoMethodTest {
 	
 	@Test
 	public void infoResultParsing() {
-		Info info = info("http://tcrn.ch/a4MSUH").apply(doc);
+		UrlInfo info = info("http://tcrn.ch/a4MSUH").apply(doc);
 		assertEquals("j3h14h", info.getCreatedBy());
 		assertEquals("Windows Mobile Finally Checks Out Foursquare", info.getTitle());
 	}
