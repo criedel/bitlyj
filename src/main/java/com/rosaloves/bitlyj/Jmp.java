@@ -3,7 +3,6 @@ package com.rosaloves.bitlyj;
 import com.rosaloves.bitlyj.Bitly.Provider;
 
 /**
- * Jmp
  * 
  * $Id$
  * 

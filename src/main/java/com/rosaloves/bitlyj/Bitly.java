@@ -3,7 +3,7 @@ package com.rosaloves.bitlyj;
 import java.util.Set;
 
 /**
- * Bitly
+ * Utility functions comprising the DSL.
  * 
  * $Id$
  * 

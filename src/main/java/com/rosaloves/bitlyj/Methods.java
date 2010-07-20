@@ -15,7 +15,8 @@ import com.rosaloves.bitlyj.utils.Dom;
 
 
 /**
- * Methods
+ * Utility class to support the DSL. Exposes method instances via static
+ * functions their with corresponding names.
  * 
  * $Id$
  * 

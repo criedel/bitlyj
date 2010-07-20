@@ -1,7 +1,6 @@
 package com.rosaloves.bitlyj.data;
 
 /**
- * Pair
  * 
  * $Id$
  * 
@@ -18,7 +17,8 @@ public final class Pair<A, B> {
 		return new Pair<A, B>(one, two);
 	}
 	
-	public Pair(A one, B two) {
+	/* Pair.p provides instances. */
+	private Pair(A one, B two) {
 		super();
 		this.one = one;
 		this.two = two;

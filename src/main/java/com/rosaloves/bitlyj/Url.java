@@ -1,7 +1,6 @@
 package com.rosaloves.bitlyj;
 
 /**
- * Url
  * 
  * $Id$
  * 

@@ -3,8 +3,7 @@ package com.rosaloves.bitlyj.utils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- * Dom
+/** 
  * 
  * $Id$
  * 
@@ -13,6 +12,7 @@ import org.w3c.dom.NodeList;
  */
 public final class Dom {
 	
+	/* Android support (dalvik doesn't support Node#getTextContent) */
 	public static String getTextContent(Node n) {
 		StringBuffer sb = new StringBuffer(); 
 		NodeList nl = n.getChildNodes(); 

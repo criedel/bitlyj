@@ -5,7 +5,7 @@ import org.w3c.dom.Document;
 import com.rosaloves.bitlyj.data.Pair;
 
 /**
- * BitlyMethod
+ * A method invokable via a Provider.
  * 
  * $Id$
  * 

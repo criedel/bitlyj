@@ -1,7 +1,6 @@
 package com.rosaloves.bitlyj;
 
 /**
- * Info
  * 
  * $Id$
  * 
@@ -16,11 +15,6 @@ public class Info {
 	
 	private final String title;
 
-	/**
-	 * @param url
-	 * @param createdBy
-	 * @param title
-	 */
 	public Info(Url url, String createdBy, String title) {
 		super();
 		this.url = url;

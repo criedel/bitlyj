@@ -16,7 +16,6 @@ import com.rosaloves.bitlyj.data.Pair;
 import com.rosaloves.bitlyj.utils.Dom;
 
 /**
- * Shortener
  * 
  * $Id$
  * 
