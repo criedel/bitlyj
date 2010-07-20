@@ -19,6 +19,8 @@ public class Url {
 	
 	private String longUrl;
 
+	Url() {}
+	
 	public String getHash() {
 		return hash;
 	}

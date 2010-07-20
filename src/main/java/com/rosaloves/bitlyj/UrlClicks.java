@@ -15,7 +15,7 @@ public class UrlClicks {
 	
 	private final Url url;
 
-	public UrlClicks(Url url, long userClicks, long globalClicks) {
+	UrlClicks(Url url, long userClicks, long globalClicks) {
 		super();
 		this.url = url;
 		this.userClicks = userClicks;

@@ -15,7 +15,7 @@ public class Info {
 	
 	private final String title;
 
-	public Info(Url url, String createdBy, String title) {
+	Info(Url url, String createdBy, String title) {
 		super();
 		this.url = url;
 		this.createdBy = createdBy;
