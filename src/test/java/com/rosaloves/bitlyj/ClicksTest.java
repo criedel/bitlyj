@@ -64,7 +64,6 @@ public class ClicksTest {
 		UrlClicks clicks = new UrlClicks(new Url(), 1, 2);
 		assertEquals(1, clicks.getUserClicks());
 		assertEquals(2, clicks.getGlobalClicks());
-		assertEquals(3, clicks.getTotalClicks());
 	}
 	
 	@Test
@@ -73,7 +72,6 @@ public class ClicksTest {
 		
 		assertEquals(0, clicks.getUserClicks());
 		assertEquals(1105, clicks.getGlobalClicks());
-		assertEquals(1105, clicks.getTotalClicks());
 	}
 	
 	@Test
