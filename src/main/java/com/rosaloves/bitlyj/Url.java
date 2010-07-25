@@ -5,25 +5,19 @@ package com.rosaloves.bitlyj;
  * $Id$
  * 
  * @author clewis Jul 17, 2010
- *
+ * 
  */
 public class Url {
 	
 	private String globalHash;
-	
+
 	private String userHash;
-	
-	private String hash;
-	
+
 	private String shortUrl;
-	
+
 	private String longUrl;
 
 	Url() {}
-	
-	public String getHash() {
-		return hash;
-	}
 
 	public String getGlobalHash() {
 		return globalHash;
@@ -57,14 +51,10 @@ public class Url {
 		this.longUrl = longUrl;
 	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
-	}
-
 	@Override
 	public String toString() {
-		return "Url [globalHash=" + globalHash + ", hash=" + hash
-				+ ", longUrl=" + longUrl + ", shortUrl=" + shortUrl + "]";
+		return "Url [globalHash=" + globalHash + ", longUrl=" + longUrl
+				+ ", shortUrl=" + shortUrl + ", userHash=" + userHash + "]";
 	}
-	
+
 }

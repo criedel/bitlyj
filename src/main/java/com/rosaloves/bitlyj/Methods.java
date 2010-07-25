@@ -158,7 +158,7 @@ public final class Methods {
 			} else if("user_hash".equals(name)) {
 				url.setUserHash(value);
 			} else if("hash".equals(name)) {
-				url.setHash(value);
+				url.setUserHash(value);
 			}
 		}
 		return url;

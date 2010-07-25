@@ -35,7 +35,7 @@ public class FactoryTest {
 	public void testExpand() {
 		Url url = bitly.call(expand("j3"));
 		assertEquals("lLWr", url.getGlobalHash());
-		assertEquals("j3", url.getHash());
+		assertEquals("j3", url.getUserHash());
 		assertEquals("http://www.scotster.com/qf/?1152", url.getLongUrl());
 		
 	}
@@ -44,7 +44,7 @@ public class FactoryTest {
 	public void testInfo() {
 		Url url = bitly.call(info("j3")).getUrl();
 		assertEquals("lLWr", url.getGlobalHash());
-		assertEquals("j3", url.getHash());
+		assertEquals("j3", url.getUserHash());
 	}
 	
 }

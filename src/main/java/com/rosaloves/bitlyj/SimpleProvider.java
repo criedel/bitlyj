@@ -38,8 +38,8 @@ class SimpleProvider implements Provider {
 	}
 	
 	public <A> A call(BitlyMethod<A> m) {
-		String endPoint = getUrlForCall(m);
-		Document response = filterErrorResponse(fetchUrl(endPoint));
+		String url = getUrlForCall(m);
+		Document response = filterErrorResponse(fetchUrl(url));
 		return m.apply(response);
 	}
 	

@@ -42,7 +42,7 @@ public class ShortenMethodTest {
 		Url url = shorten("http://betaworks.com/").apply(doc);
 		
 		assertEquals("1YKMfY", url.getGlobalHash());
-		assertEquals("cmeH01", url.getHash());
+		assertEquals("cmeH01", url.getUserHash());
 		assertEquals("http://betaworks.com/", url.getLongUrl());
 		assertEquals("http://bit.ly/cmeH01", url.getShortUrl());
 	}
