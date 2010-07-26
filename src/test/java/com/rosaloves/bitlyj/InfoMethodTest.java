@@ -1,5 +1,6 @@
 package com.rosaloves.bitlyj;
 
+import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Methods.info;
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
+
+import com.rosaloves.bitlyj.Bitly.Provider;
 
 /**
  * Factory
@@ -18,6 +21,7 @@ import org.w3c.dom.Document;
  */
 public class InfoMethodTest {
 	
+	Provider bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	Document doc;
 	
 	@Before
@@ -58,14 +62,14 @@ public class InfoMethodTest {
 	
 	@Test
 	public void infoResultParsing() {
-		UrlInfo info = info("http://tcrn.ch/a4MSUH").apply(doc);
+		UrlInfo info = info("http://tcrn.ch/a4MSUH").apply(bitly, doc);
 		assertEquals("j3h14h", info.getCreatedBy());
 		assertEquals("Windows Mobile Finally Checks Out Foursquare", info.getTitle());
 	}
 	
 	@Test
 	public void urlResultParsing() {
-		Url url = info("http://tcrn.ch/a4MSUH").apply(doc).getUrl();
+		Url url = info("http://tcrn.ch/a4MSUH").apply(bitly, doc).getUrl();
 		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
 		assertEquals("bWw49z", url.getGlobalHash());
 		assertEquals("a4MSUH", url.getUserHash());

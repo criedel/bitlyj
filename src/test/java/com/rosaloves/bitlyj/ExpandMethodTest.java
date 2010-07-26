@@ -1,5 +1,6 @@
 package com.rosaloves.bitlyj;
 
+import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.expand;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
+
+import com.rosaloves.bitlyj.Bitly.Provider;
 
 /**
  * ExpandMethod
@@ -18,6 +21,8 @@ import org.w3c.dom.Document;
  *
  */
 public class ExpandMethodTest {
+	
+	Provider bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	Document doc;
 	
 	@Before
@@ -60,7 +65,7 @@ public class ExpandMethodTest {
 	
 	@Test
 	public void applyToDocument() {
-		Url url = expand("j3").apply(doc);
+		Url url = expand("j3").apply(bitly, doc);
 		
 		assertEquals("lLWr", url.getGlobalHash());
 		assertEquals("j3", url.getUserHash());

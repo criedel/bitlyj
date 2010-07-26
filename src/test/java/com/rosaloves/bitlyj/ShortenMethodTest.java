@@ -1,5 +1,6 @@
 package com.rosaloves.bitlyj;
 
+import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.expand;
 import static com.rosaloves.bitlyj.Bitly.shorten;
 import static org.junit.Assert.assertEquals;
@@ -8,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
+
+import com.rosaloves.bitlyj.Bitly.Provider;
 
 /**
  * ShortenMethod
@@ -18,6 +21,8 @@ import org.w3c.dom.Document;
  *
  */
 public class ShortenMethodTest {
+	
+	Provider bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	Document doc;
 	
 	@Before
@@ -39,7 +44,7 @@ public class ShortenMethodTest {
 	
 	@Test
 	public void applyToDocument() {
-		Url url = shorten("http://betaworks.com/").apply(doc);
+		Url url = shorten("http://betaworks.com/").apply(bitly, doc);
 		
 		assertEquals("1YKMfY", url.getGlobalHash());
 		assertEquals("cmeH01", url.getUserHash());

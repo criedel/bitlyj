@@ -2,8 +2,6 @@ package com.rosaloves.bitlyj;
 
 import java.util.Arrays;
 
-import org.w3c.dom.Document;
-
 import com.rosaloves.bitlyj.data.Pair;
 
 /**
@@ -41,7 +39,5 @@ public abstract class MethodBase<A> implements BitlyMethod<A> {
 		return getClass().getSimpleName() 
 			+ " [name=" + name + ", parameters=" + parameters + "]";
 	}
-
-	public abstract A apply(Document document);
 	
 }

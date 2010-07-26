@@ -16,39 +16,31 @@ public class Url {
 	private String shortUrl;
 
 	private String longUrl;
-
+	
 	Url() {}
+	
+	Url(String globalHash, String userHash, String shortUrl, String longUrl) {
+		super();
+		this.globalHash = globalHash;
+		this.userHash = userHash;
+		this.shortUrl = shortUrl;
+		this.longUrl = longUrl;
+	}
 
 	public String getGlobalHash() {
 		return globalHash;
-	}
-
-	public void setGlobalHash(String globalHash) {
-		this.globalHash = globalHash;
 	}
 
 	public String getUserHash() {
 		return userHash;
 	}
 
-	public void setUserHash(String userHash) {
-		this.userHash = userHash;
-	}
-
 	public String getShortUrl() {
 		return shortUrl;
 	}
 
-	public void setShortUrl(String shortUrl) {
-		this.shortUrl = shortUrl;
-	}
-
 	public String getLongUrl() {
 		return longUrl;
-	}
-
-	public void setLongUrl(String longUrl) {
-		this.longUrl = longUrl;
 	}
 
 	@Override

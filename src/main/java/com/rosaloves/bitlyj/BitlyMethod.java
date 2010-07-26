@@ -2,6 +2,7 @@ package com.rosaloves.bitlyj;
 
 import org.w3c.dom.Document;
 
+import com.rosaloves.bitlyj.Bitly.Provider;
 import com.rosaloves.bitlyj.data.Pair;
 
 /**
@@ -19,6 +20,6 @@ public interface BitlyMethod<A> {
 
 	public Iterable<Pair<String, String>> getParameters();
 
-	public A apply(Document document);
+	public A apply(Provider provider, Document document);
 	
 }

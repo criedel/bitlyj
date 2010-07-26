@@ -1,5 +1,6 @@
 package com.rosaloves.bitlyj;
 
+import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.clicks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -10,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+import com.rosaloves.bitlyj.Bitly.Provider;
+
 /**
  * ClicksTest
  * 
@@ -19,6 +22,8 @@ import org.w3c.dom.Document;
  *
  */
 public class ClicksTest {
+	
+	Provider bitly = as("bitlyapidemo", "R_0da49e0a9118ff35f52f629d2d71bf07");
 	Document doc;
 	
 	@Before
@@ -68,7 +73,7 @@ public class ClicksTest {
 	
 	@Test
 	public void clickResultParsing() {
-		UrlClicks clicks = clicks("http://tcrn.ch/a4MSUH").apply(doc);
+		UrlClicks clicks = clicks("http://tcrn.ch/a4MSUH").apply(bitly, doc);
 		
 		assertEquals(0, clicks.getUserClicks());
 		assertEquals(1105, clicks.getGlobalClicks());
@@ -76,7 +81,7 @@ public class ClicksTest {
 	
 	@Test
 	public void urlResultParsing() {
-		Url url = clicks("http://tcrn.ch/a4MSUH").apply(doc).getUrl();
+		Url url = clicks("http://tcrn.ch/a4MSUH").apply(bitly, doc).getUrl();
 		
 		assertEquals("http://tcrn.ch/a4MSUH", url.getShortUrl());
 		assertEquals("bWw49z", url.getGlobalHash());
@@ -86,7 +91,7 @@ public class ClicksTest {
 	@Test
 	public void multipleUrlResultParsing() {
 		doc = Utils.classpathXmlIS("clicks_2_urls.xml");
-		Set<UrlClicks> clicks = clicks("http://tcrn.ch/a4MSUH", "http://bit.ly/1YKMfY").apply(doc);
+		Set<UrlClicks> clicks = clicks("http://tcrn.ch/a4MSUH", "http://bit.ly/1YKMfY").apply(bitly, doc);
 		
 		assertEquals(2, clicks.size());
 	}
@@ -94,7 +99,7 @@ public class ClicksTest {
 	@Test
 	public void multipleHashResultParsing() {
 		doc = Utils.classpathXmlIS("clicks_2_urls.xml");
-		Set<UrlClicks> clicks = clicks("bWw49z", "1YKMfY").apply(doc);
+		Set<UrlClicks> clicks = clicks("bWw49z", "1YKMfY").apply(bitly, doc);
 		
 		assertEquals(2, clicks.size());
 	}

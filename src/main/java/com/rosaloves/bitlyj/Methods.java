@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.rosaloves.bitlyj.Bitly.Provider;
 import com.rosaloves.bitlyj.data.Pair;
 import com.rosaloves.bitlyj.utils.Dom;
 
@@ -23,12 +24,11 @@ import com.rosaloves.bitlyj.utils.Dom;
  * @author clewis Jul 18, 2010
  *
  */
-public final class Methods {
+final class Methods {
 	
 	public static BitlyMethod<UrlInfo> info(String value) {
 		return new MethodBase<UrlInfo>("info", getUrlMethodArgs(value)) {
-			@Override
-			public UrlInfo apply(Document document) {
+			public UrlInfo apply(Provider provider, Document document) {
 				return parseInfo(document.getElementsByTagName("info").item(0));
 			}
 		};
@@ -36,8 +36,7 @@ public final class Methods {
 	
 	public static BitlyMethod<Set<UrlInfo>> info(String ... values) {
 		return new MethodBase<Set<UrlInfo>>("info", getUrlMethodArgs(values)) {
-			@Override
-			public Set<UrlInfo> apply(Document document) {
+			public Set<UrlInfo> apply(Provider provider, Document document) {
 				HashSet<UrlInfo> inf = new HashSet<UrlInfo>();
 				NodeList infos = document.getElementsByTagName("info");
 				for(int i = 0; i < infos.getLength(); i ++) {
@@ -50,8 +49,7 @@ public final class Methods {
 	
 	public static BitlyMethod<Url> expand(String values) {
 		return new MethodBase<Url>("expand", getUrlMethodArgs(values)) {
-			@Override
-			public Url apply(Document document) {
+			public Url apply(Provider provider, Document document) {
 				return parseUrl(document.getElementsByTagName("entry").item(0));
 			}
 		};
@@ -59,9 +57,7 @@ public final class Methods {
 	
 	public static BitlyMethod<Set<Url>> expand(String ... values) {
 		return new MethodBase<Set<Url>>("expand", getUrlMethodArgs(values)) {
-			
-			@Override
-			public Set<Url> apply(Document document) {
+			public Set<Url> apply(Provider provider, Document document) {
 				
 				HashSet<Url> inf = new HashSet<Url>();
 				
@@ -77,8 +73,7 @@ public final class Methods {
 
 	public static BitlyMethod<Url> shorten(String longUrl) {
 		return new MethodBase<Url>("shorten", Pair.p("longUrl", longUrl)) {
-			@Override
-			public Url apply(Document document) {
+			public Url apply(Provider provider, Document document) {
 				NodeList infos = document.getElementsByTagName("data");
 				return parseUrl(infos.item(0));
 			}
@@ -87,8 +82,7 @@ public final class Methods {
 	
 	public static BitlyMethod<UrlClicks> clicks(String string) {
 		return new MethodBase<UrlClicks>("clicks", Pair.p(hashOrUrl(string), string)) {
-			@Override
-			public UrlClicks apply(Document document) {
+			public UrlClicks apply(Provider provider, Document document) {
 				return parseClicks(document.getElementsByTagName("clicks").item(0));
 			}
 		};
@@ -96,8 +90,7 @@ public final class Methods {
 	
 	public static BitlyMethod<Set<UrlClicks>> clicks(String ... string) {
 		return new MethodBase<Set<UrlClicks>>("clicks", getUrlMethodArgs(string)) {
-			@Override
-			public Set<UrlClicks> apply(Document document) {
+			public Set<UrlClicks> apply(Provider provider, Document document) {
 				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
 				NodeList nl = document.getElementsByTagName("clicks");
 				for(int i = 0; i < nl.getLength(); i ++) {
@@ -139,7 +132,7 @@ public final class Methods {
 	}
 
 	static Url parseUrl(Node nl) {
-		Url url = new Url();
+		String gHash = "", uHash = "", sUrl = "", lUrl = "";
 		NodeList il = nl.getChildNodes();
 		for(int i = 0; i < il.getLength(); i ++) {
 			
@@ -148,20 +141,20 @@ public final class Methods {
 			String value = Dom.getTextContent(n);
 			
 			if("short_url".equals(name)) {
-				url.setShortUrl(value);
+				sUrl = value;
 			} else if("long_url".equals(name)) {
-				url.setLongUrl(value);
+				lUrl = value;
 			} else if("url".equals(name)) {
-				url.setShortUrl(value);
+				sUrl = value;
 			} else if("global_hash".equals(name)) {
-				url.setGlobalHash(value);
+				gHash = value;
 			} else if("user_hash".equals(name)) {
-				url.setUserHash(value);
+				uHash = value;
 			} else if("hash".equals(name)) {
-				url.setUserHash(value);
+				uHash = value;
 			}
 		}
-		return url;
+		return new Url(gHash, uHash, sUrl, lUrl);
 	}
 	
 	static UrlInfo parseInfo(Node nl) {
