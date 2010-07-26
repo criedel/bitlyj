@@ -29,7 +29,7 @@ final class Methods {
 	public static BitlyMethod<UrlInfo> info(String value) {
 		return new MethodBase<UrlInfo>("info", getUrlMethodArgs(value)) {
 			public UrlInfo apply(Provider provider, Document document) {
-				return parseInfo(document.getElementsByTagName("info").item(0));
+				return parseInfo(provider, document.getElementsByTagName("info").item(0));
 			}
 		};
 	}
@@ -40,7 +40,7 @@ final class Methods {
 				HashSet<UrlInfo> inf = new HashSet<UrlInfo>();
 				NodeList infos = document.getElementsByTagName("info");
 				for(int i = 0; i < infos.getLength(); i ++) {
-					inf.add(parseInfo(infos.item(i)));
+					inf.add(parseInfo(provider, infos.item(i)));
 				}
 				return inf;
 			}
@@ -50,7 +50,7 @@ final class Methods {
 	public static BitlyMethod<Url> expand(String values) {
 		return new MethodBase<Url>("expand", getUrlMethodArgs(values)) {
 			public Url apply(Provider provider, Document document) {
-				return parseUrl(document.getElementsByTagName("entry").item(0));
+				return parseUrl(provider, document.getElementsByTagName("entry").item(0));
 			}
 		};
 	}
@@ -63,7 +63,7 @@ final class Methods {
 				
 				NodeList infos = document.getElementsByTagName("entry");
 				for(int i = 0; i < infos.getLength(); i ++) {
-					inf.add(parseUrl(infos.item(i)));
+					inf.add(parseUrl(provider, infos.item(i)));
 				}
 				
 				return inf;
@@ -71,11 +71,11 @@ final class Methods {
 		};
 	}
 
-	public static BitlyMethod<Url> shorten(String longUrl) {
-		return new MethodBase<Url>("shorten", Pair.p("longUrl", longUrl)) {
-			public Url apply(Provider provider, Document document) {
+	public static BitlyMethod<ShortenedUrl> shorten(final String longUrl) {
+		return new MethodBase<ShortenedUrl>("shorten", Pair.p("longUrl", longUrl)) {
+			public ShortenedUrl apply(Provider provider, Document document) {
 				NodeList infos = document.getElementsByTagName("data");
-				return parseUrl(infos.item(0));
+				return parseShortenedUrl(provider, infos.item(0));
 			}
 		};
 	}
@@ -83,7 +83,7 @@ final class Methods {
 	public static BitlyMethod<UrlClicks> clicks(String string) {
 		return new MethodBase<UrlClicks>("clicks", Pair.p(hashOrUrl(string), string)) {
 			public UrlClicks apply(Provider provider, Document document) {
-				return parseClicks(document.getElementsByTagName("clicks").item(0));
+				return parseClicks(provider, document.getElementsByTagName("clicks").item(0));
 			}
 		};
 	}
@@ -94,7 +94,7 @@ final class Methods {
 				HashSet<UrlClicks> clicks = new HashSet<UrlClicks>();
 				NodeList nl = document.getElementsByTagName("clicks");
 				for(int i = 0; i < nl.getLength(); i ++) {
-					clicks.add(parseClicks(nl.item(i)));
+					clicks.add(parseClicks(provider, nl.item(i)));
 				}
 				return clicks;
 			}
@@ -116,7 +116,7 @@ final class Methods {
 		return p.startsWith("http://") ? "shortUrl" : "hash";
 	}
 	
-	static UrlClicks parseClicks(Node item) {
+	static UrlClicks parseClicks(Provider provider, Node item) {
 		NodeList nl = item.getChildNodes();
 		long user = 0, global = 0;
 		for(int i = 0; i < nl.getLength(); i++) {
@@ -128,10 +128,34 @@ final class Methods {
 				global = Long.parseLong(value);
 			}
 		}
-		return new UrlClicks(Methods.parseUrl(item), user, global);
+		return new UrlClicks(Methods.parseUrl(provider, item), user, global);
+	}
+	
+	static ShortenedUrl parseShortenedUrl(Provider provider, Node nl) {
+		String gHash = "", uHash = "", sUrl = "", lUrl = "", isNew = "";
+		NodeList il = nl.getChildNodes();
+		for(int i = 0; i < il.getLength(); i ++) {
+			
+			Node n = il.item(i);
+			String name = n.getNodeName();
+			String value = Dom.getTextContent(n).trim();
+			
+			if("new_hash".equals(name)) {
+				isNew = value;
+			} else if("url".equals(name)) {
+				sUrl = value;
+			} else if("long_url".equals(name)) {
+				lUrl = value;
+			} else if("global_hash".equals(name)) {
+				gHash = value;
+			} else if("hash".equals(name)) {
+				uHash = value;
+			}
+		}
+		return new ShortenedUrl(new Url(provider.getUrl(), gHash, uHash, sUrl, lUrl), isNew.equals("1"));
 	}
 
-	static Url parseUrl(Node nl) {
+	static Url parseUrl(Provider provider, Node nl) {
 		String gHash = "", uHash = "", sUrl = "", lUrl = "";
 		NodeList il = nl.getChildNodes();
 		for(int i = 0; i < il.getLength(); i ++) {
@@ -144,8 +168,6 @@ final class Methods {
 				sUrl = value;
 			} else if("long_url".equals(name)) {
 				lUrl = value;
-			} else if("url".equals(name)) {
-				sUrl = value;
 			} else if("global_hash".equals(name)) {
 				gHash = value;
 			} else if("user_hash".equals(name)) {
@@ -154,10 +176,10 @@ final class Methods {
 				uHash = value;
 			}
 		}
-		return new Url(gHash, uHash, sUrl, lUrl);
+		return new Url(provider.getUrl(), gHash, uHash, sUrl, lUrl);
 	}
 	
-	static UrlInfo parseInfo(Node nl) {
+	static UrlInfo parseInfo(Provider provider, Node nl) {
 		NodeList il = nl.getChildNodes();
 		
 		String title = "", createdBy = "";
@@ -176,7 +198,7 @@ final class Methods {
 			
 		}
 		
-		return new UrlInfo(parseUrl(nl), createdBy, title);
+		return new UrlInfo(parseUrl(provider, nl), createdBy, title);
 	}
 		
 }

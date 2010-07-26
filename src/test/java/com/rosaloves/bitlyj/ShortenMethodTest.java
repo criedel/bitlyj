@@ -1,7 +1,6 @@
 package com.rosaloves.bitlyj;
 
 import static com.rosaloves.bitlyj.Bitly.as;
-import static com.rosaloves.bitlyj.Bitly.expand;
 import static com.rosaloves.bitlyj.Bitly.shorten;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,7 +31,7 @@ public class ShortenMethodTest {
 	
 	@Test
 	public void name() {
-		assertEquals("expand", expand("j3").getName());
+		assertEquals("shorten", shorten("http://betaworks.com/").getName());
 	}
 
 	@Test
@@ -44,7 +43,7 @@ public class ShortenMethodTest {
 	
 	@Test
 	public void applyToDocument() {
-		Url url = shorten("http://betaworks.com/").apply(bitly, doc);
+		Url url = shorten("http://betaworks.com/").apply(bitly, doc).getUrl();
 		
 		assertEquals("1YKMfY", url.getGlobalHash());
 		assertEquals("cmeH01", url.getUserHash());

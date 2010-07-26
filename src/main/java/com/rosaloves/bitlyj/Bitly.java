@@ -14,12 +14,14 @@ public final class Bitly {
 	
 	public static interface Provider {
 		
-		public abstract <A> A call(BitlyMethod<A> m);
+		public <A> A call(BitlyMethod<A> m);
+		
+		public String getUrl();
 		
 	}
 	
 	public static Provider as(String user, String apiKey) {
-		return new SimpleProvider(user, apiKey, "http://api.bit.ly/v3/");
+		return new SimpleProvider("http://bit.ly/", user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
 	public static BitlyMethod<UrlInfo> info(String value) {
@@ -38,7 +40,7 @@ public final class Bitly {
 		return Methods.expand(value);
 	}
 	
-	public static BitlyMethod<Url> shorten(String longUrl) {
+	public static BitlyMethod<ShortenedUrl> shorten(String longUrl) {
 		return Methods.shorten(longUrl);
 	}
 	

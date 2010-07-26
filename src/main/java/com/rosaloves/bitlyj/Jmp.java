@@ -12,7 +12,7 @@ import com.rosaloves.bitlyj.Bitly.Provider;
 public class Jmp {
 	
 	public static Provider as(String user, String apiKey) {
-		return new SimpleProvider(user, apiKey, "http://api.j.mp/v3/");
+		return new SimpleProvider("http://j.mp/", user, apiKey, "http://api.j.mp/v3/");
 	}
 	
 }

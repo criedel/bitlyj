@@ -24,14 +24,17 @@ import com.rosaloves.bitlyj.utils.Dom;
  */
 class SimpleProvider implements Provider {
 	
+	private final String url;
+	
 	private final String user;
 	
 	private final String apiKey;
 	
 	private final String endPoint;
 
-	SimpleProvider(String user, String apiKey, String endPoint) {
+	SimpleProvider(String url, String user, String apiKey, String endPoint) {
 		super();
+		this.url = url;
 		this.user = user;
 		this.apiKey = apiKey;
 		this.endPoint = endPoint;
@@ -43,9 +46,14 @@ class SimpleProvider implements Provider {
 		return m.apply(this, response);
 	}
 	
+	public String getUrl() {
+		return this.url;
+	}
+
 	@Override
 	public String toString() {
-		return "SimpleProvider [endPoint=" + endPoint + "]";
+		return "SimpleProvider [apiKey=" + apiKey + ", endPoint=" + endPoint
+				+ ", url=" + url + ", user=" + user + "]";
 	}
 
 	protected String getUrlForCall(BitlyMethod<?> m) {
@@ -98,5 +106,5 @@ class SimpleProvider implements Provider {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 }
