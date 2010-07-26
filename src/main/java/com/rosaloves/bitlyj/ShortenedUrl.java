@@ -8,20 +8,14 @@ package com.rosaloves.bitlyj;
  * @author clewis Jul 26, 2010
  *
  */
-public class ShortenedUrl {
-	
-	private final Url url;
+public class ShortenedUrl extends Url {
 	
 	private final boolean newHash;
 	
-	ShortenedUrl(Url url, boolean newHash) {
-		super();
-		this.url = url;
+	ShortenedUrl(String shortBase, String globalHash, String userHash,
+			String shortUrl, String longUrl, boolean newHash) {
+		super(shortBase, globalHash, userHash, shortUrl, longUrl);
 		this.newHash = newHash;
-	}
-
-	public Url getUrl() {
-		return url;
 	}
 
 	public boolean isNewHash() {
@@ -30,7 +24,10 @@ public class ShortenedUrl {
 
 	@Override
 	public String toString() {
-		return "ShortenedUrl [newHash=" + newHash + ", url=" + url + "]";
+		return "ShortenedUrl [newHash=" + newHash + ", getGlobalHash()="
+				+ getGlobalHash() + ", getLongUrl()=" + getLongUrl()
+				+ ", getShortUrl()=" + getShortUrl() + ", getUserHash()="
+				+ getUserHash() + "]";
 	}
-	
+
 }

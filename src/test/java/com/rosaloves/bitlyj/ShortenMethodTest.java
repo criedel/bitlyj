@@ -43,7 +43,7 @@ public class ShortenMethodTest {
 	
 	@Test
 	public void applyToDocument() {
-		Url url = shorten("http://betaworks.com/").apply(bitly, doc).getUrl();
+		Url url = shorten("http://betaworks.com/").apply(bitly, doc);
 		
 		assertEquals("1YKMfY", url.getGlobalHash());
 		assertEquals("cmeH01", url.getUserHash());

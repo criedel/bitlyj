@@ -152,7 +152,7 @@ final class Methods {
 				uHash = value;
 			}
 		}
-		return new ShortenedUrl(new Url(provider.getUrl(), gHash, uHash, sUrl, lUrl), isNew.equals("1"));
+		return new ShortenedUrl(provider.getUrl(), gHash, uHash, sUrl, lUrl, isNew.equals("1"));
 	}
 
 	static Url parseUrl(Provider provider, Node nl) {

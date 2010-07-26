@@ -25,7 +25,7 @@ public class FactoryTest {
 	
 	@Test
 	public void testShorten() {
-		Url url = bitly.call(shorten("http://www.scotster.com/qf/?1152")).getUrl();
+		Url url = bitly.call(shorten("http://www.scotster.com/qf/?1152"));
 		assertEquals("lLWr", url.getGlobalHash());
 		assertEquals("http://www.scotster.com/qf/?1152", url.getLongUrl());
 		
