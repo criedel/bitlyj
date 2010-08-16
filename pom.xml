@@ -148,12 +148,12 @@
 		<repository>
 			<id>oss.sonatype.org</id>
 			<name>Nexus Staging Repository</name>
-			<url>http://oss.sonatype.org/content/repositories/releases/</url>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>oss.sonatype.org</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
