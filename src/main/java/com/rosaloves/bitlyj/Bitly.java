@@ -24,6 +24,10 @@ public final class Bitly {
 		return new SimpleProvider("http://bit.ly/", user, apiKey, "http://api.bit.ly/v3/");
 	}
 	
+	public static Provider forOAuth(String accessToken) {
+	    return new OauthBitlyProvider(accessToken);
+	}
+	
 	public static BitlyMethod<UrlInfo> info(String value) {
 		return Methods.info(value);
 	}
